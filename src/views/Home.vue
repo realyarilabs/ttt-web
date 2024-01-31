@@ -54,14 +54,6 @@ const createGame = (createGameId?: boolean) => {
     background-size: 9rem 9rem;
 }
 
-.ttt-h1{
-  color: var(--Light-Text);
-  font-family: "Noto Sans";
-  font-size: 2.375rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
 
 .ttt-subtext{
   color: var(--Light-Text-2);

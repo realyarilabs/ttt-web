@@ -38,6 +38,7 @@ usePhoenixSocketStore();
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .btn-1{
@@ -51,5 +52,14 @@ usePhoenixSocketStore();
 
 .t-orange{
   color: var(--CTA-2);
+}
+
+.ttt-h1{
+  color: var(--Light-Text);
+  font-family: "Noto Sans";
+  font-size: 2.375rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 </style>
