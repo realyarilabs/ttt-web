@@ -10,12 +10,23 @@
         <button class="ttt-button btn-2 mt-[2.12rem]" @click="createGame()">JOIN EXISTING GAME</button>
       </div>
   </div>
+  <div class="flex h-full w-full absolute px-14 py-5">
+    <img :src="oSvg" class="ttt-icon" alt="o">
+    <img :src="xSvg" class="ttt-icon" alt="x">
+    <img :src="xSvg" class="ttt-icon" alt="x">
+    <img :src="xSvg" class="ttt-icon" alt="x">
+    <img :src="oSvg" class="ttt-icon" alt="o">
+    <img :src="oSvg" class="ttt-icon" alt="o">
+  </div>
  </div>
 </template>
 
 <script setup lang="ts">
 import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
 import { useRouter } from "vue-router";
+
+import xSvg from '../assets/x.svg'
+import oSvg from '../assets/o.svg'
 
 const phoenixSocketStore = usePhoenixSocketStore();
 const router = useRouter();
@@ -89,5 +100,10 @@ const createGame = (createGameId?: boolean) => {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.ttt-icon{
+  width: 2.5rem;
+  height: 5.5rem;
 }
 </style>
