@@ -13,6 +13,11 @@ const router = createRouter({
       component: () => import("./views/Game.vue"),
       name: "game",
     },
+    {
+      path: "/end",
+      component: () => import("./views/EndScreen.vue"),
+      name: "end",
+    },
   ],
 });
 
