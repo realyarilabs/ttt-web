@@ -1,13 +1,15 @@
 <template>
-  <div class="flex flex-col items-center">
-    <div>TIC TAC TOE CHALLENGE !</div>
-    <div>Ready for a game of Xs and Os ?</div>
+  <div class="h-screen w-screen flex items-center justify-center">
+    <div class="flex flex-col justify-center items-center">
+      <div>TIC TAC TOE CHALLENGE !</div>
+      <div>Ready for a game of Xs and Os ?</div>
 
-    <button @click="createGame(true)">CREATE NEW GAME</button>
-    <span> OR</span>
-    <input v-model="phoenixSocketStore.gameID" placeholder="Enter Game ID" />
-    <button @click="createGame()">JOIN EXISTING GAME</button>
+      <button @click="createGame(true)">CREATE NEW GAME</button>
+      <span> OR</span>
+      <input v-model="phoenixSocketStore.gameID" placeholder="Enter Game ID" />
+      <button @click="createGame()">JOIN EXISTING GAME</button>
   </div>
+ </div>
 </template>
 
 <script setup lang="ts">
