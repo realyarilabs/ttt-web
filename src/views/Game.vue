@@ -27,7 +27,7 @@
     <div class="flex h-full w-full absolute px-14 py-5">
       <div class="relative flex h-full w-full">
         <img :src="exitSvg" class="ttt-icon absolute top-0 left-0 cursor-pointer" alt="exit" @click="router.back()">
-        <img :src="volumeSvg" class="ttt-icon absolute top-0 right-0 cursor-pointer" alt="volume">
+        <volumeButton />
       </div>
     </div>
     <!--div >
@@ -43,10 +43,11 @@ import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
 
 import xSvg from '../assets/x.svg'
 import oSvg from '../assets/o.svg'
-import volumeSvg from '../assets/volume.svg'
 import exitSvg from '../assets/exit.svg'
 import copySvg from '../assets/copy.svg'
 import infoSvg from '../assets/info.svg'
+
+import volumeButton from "../components/volumeButton.vue";
 
 const phoenixSocketStore = usePhoenixSocketStore();
 
