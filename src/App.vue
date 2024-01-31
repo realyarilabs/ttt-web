@@ -36,6 +36,7 @@ usePhoenixSocketStore();
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 }
 
 .btn-1{

@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen w-screen flex items-center justify-center bg-ttt ttt-grid">
-    <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center z-10">
       <h1 class="ttt-h1 pb-2">TIC TAC TOE CHALLENGE !</h1>
       <p class="ttt-subtext">Ready for a game of Xs and Os ?</p>
       <div class="flex flex-col justify-center items-center pt-[3.69rem]">
@@ -53,6 +53,7 @@ const createGame = (createGameId?: boolean) => {
       repeating-linear-gradient(90deg, var(--lines) 0 1px, transparent 1px 100%);
     background-size: 9rem 9rem;
 }
+
 .ttt-h1{
   color: var(--Light-Text);
   font-family: "Noto Sans";
