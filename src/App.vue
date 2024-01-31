@@ -48,4 +48,8 @@ usePhoenixSocketStore();
   background: var(--CTA-2);
   color: var(--Light-Text);
 }
+
+.t-orange{
+  color: var(--CTA-2);
+}
 </style>
