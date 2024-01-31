@@ -11,10 +11,15 @@
           </button>
         </div>
       </div>
-      <p v-if="myTurn" class="ttt-subtext flex flex-row items-center ttt-turn">Your Turn : <img :src="myPiece" class="ttt-icon ml-[0.69rem]" :alt="myPieceValue"> </p>
-      <p v-else class="ttt-subtext flex flex-row items-center ttt-turn"> Opponent's TurN : <img :src="enemyPiece" class="ttt-icon ml-[0.69rem]" :alt="myPieceValue"> </p>
+      <p v-if="myTurn" class="ttt-subtext flex flex-row items-center ttt-turn">Your Turn : <img :src="myPiece" class="ttt-icon-piece ml-[0.69rem]" :alt="myPieceValue"> </p>
+      <p v-else class="ttt-subtext flex flex-row items-center ttt-turn"> Opponent's TurN : <img :src="enemyPiece" class="ttt-icon-piece ml-[0.69rem]" :alt="myPieceValue"> </p>
     </div>
-
+  <div class="flex h-full w-full absolute px-14 py-5">
+    <div class="relative flex h-full w-full">
+      <img :src="exitSvg" class="ttt-icon absolute top-0 left-0 cursor-pointer" alt="o">
+      <img :src="volumeSvg" class="ttt-icon absolute top-0 right-0 cursor-pointer" alt="x">
+    </div>
+  </div>
     <!--div >
       {{ phoenixSocketStore.gameState }}
     </div-->
@@ -28,6 +33,8 @@ import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
 
 import xSvg from '../assets/x.svg'
 import oSvg from '../assets/o.svg'
+import volumeSvg from '../assets/volume.svg'
+import exitSvg from '../assets/exit.svg'
 
 const phoenixSocketStore = usePhoenixSocketStore();
 
@@ -102,10 +109,11 @@ onMounted(() => {
   height: 7.0625rem;
 }
 
-.ttt-icon{
+.ttt-icon-piece{
   width: 1.0625rem;
   height: 2.4375rem;
 }
+
 .ttt-turn{
   color: var(--Light-Text);
   font-family: Gilroy-Light;
