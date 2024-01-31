@@ -62,4 +62,18 @@ usePhoenixSocketStore();
   font-weight: 500;
   line-height: normal;
 }
+
+.ttt-subtext{
+  color: var(--Light-Text-2);
+  font-family: Gilroy-Light;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.ttt-icon{
+  width: 2.5rem;
+  height: 5.5rem;
+}
 </style>

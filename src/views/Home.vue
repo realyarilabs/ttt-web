@@ -54,16 +54,6 @@ const createGame = (createGameId?: boolean) => {
     background-size: 9rem 9rem;
 }
 
-
-.ttt-subtext{
-  color: var(--Light-Text-2);
-  font-family: Gilroy-Light;
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
 .ttt-or{
   color: var(--Light-Text);
   font-family: "Noto Sans";
@@ -97,8 +87,4 @@ const createGame = (createGameId?: boolean) => {
   line-height: normal;
 }
 
-.ttt-icon{
-  width: 2.5rem;
-  height: 5.5rem;
-}
 </style>
