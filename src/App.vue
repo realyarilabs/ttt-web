@@ -16,6 +16,7 @@ usePhoenixSocketStore();
   --CTA: #CD4F41;
   --CTA-2: #DE9E46;
   --lines: rgba(45, 128, 120, 0.50);
+  --Game-Board-BG: rgba(45, 128, 120, 0.20);
 }
 
 .bg-ttt{
