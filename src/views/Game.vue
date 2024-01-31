@@ -16,7 +16,7 @@
     </div>
   <div class="flex h-full w-full absolute px-14 py-5">
     <div class="relative flex h-full w-full">
-      <img :src="exitSvg" class="ttt-icon absolute top-0 left-0 cursor-pointer" alt="o">
+      <img :src="exitSvg" class="ttt-icon absolute top-0 left-0 cursor-pointer" alt="o" @click="router.back()">
       <img :src="volumeSvg" class="ttt-icon absolute top-0 right-0 cursor-pointer" alt="x">
     </div>
   </div>
