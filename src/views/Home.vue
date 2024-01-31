@@ -11,12 +11,14 @@
       </div>
   </div>
   <div class="flex h-full w-full absolute px-14 py-5">
-    <img :src="oSvg" class="ttt-icon" alt="o">
-    <img :src="xSvg" class="ttt-icon" alt="x">
-    <img :src="xSvg" class="ttt-icon" alt="x">
-    <img :src="xSvg" class="ttt-icon" alt="x">
-    <img :src="oSvg" class="ttt-icon" alt="o">
-    <img :src="oSvg" class="ttt-icon" alt="o">
+    <div class="relative flex h-full w-full">
+      <img :src="oSvg" class="ttt-icon absolute top-0 left-0" alt="o">
+      <img :src="xSvg" class="ttt-icon absolute top-0 inset-x-1/2 -translate-x-2/4" alt="x">
+      <img :src="xSvg" class="ttt-icon absolute top-0 right-0" alt="x">
+      <img :src="xSvg" class="ttt-icon absolute bottom-0 left-0" alt="x">
+      <img :src="oSvg" class="ttt-icon absolute bottom-0 inset-x-1/2 -translate-x-2/4" alt="o">
+      <img :src="oSvg" class="ttt-icon absolute bottom-0 right-0" alt="o">
+    </div>
   </div>
  </div>
 </template>
