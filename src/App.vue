@@ -15,6 +15,7 @@ usePhoenixSocketStore();
   --Light-Text-2: #F4D9AE;
   --CTA: #CD4F41;
   --CTA-2: #DE9E46;
+  --lines: rgba(45, 128, 120, 0.50);
 }
 
 .bg-ttt{
