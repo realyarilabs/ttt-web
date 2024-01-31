@@ -4,35 +4,30 @@
       <h1 class="ttt-h1 pb-2">GAME ON!</h1>
       <p class="ttt-subtext">Game code</p>
       <div v-if="phoenixSocketStore.gameState" class="flex flex-col justify-center items-center pt-[3.69rem]">
-        <div
-          v-for="(row, i) of phoenixSocketStore.gameState.board"
-          :key="i"
-          class="flex gap-[0.94rem] pb-[0.94rem]"
-        >
-          <button
-            v-for="(value, j) of row"
-            :key="j"
-            class="ttt-square w-[8.125rem] h-[8.125rem] rounded-[0.625rem]"
-            @click="phoenixSocketStore.executeGameMove(i, j)"
-          >
-            {{ value || "*" }}
+        <div v-for="(row, i) of phoenixSocketStore.gameState.board" :key="i" class="flex gap-[0.94rem] pb-[0.94rem]">
+          <button v-for="(value, j) of row" :key="j" class="ttt-square w-[8.125rem] h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
+            @click="phoenixSocketStore.executeGameMove(i, j)">
+             <img v-if="value" :src="getPieceByValue(value)" class="ttt-piece" :alt="value">
           </button>
         </div>
       </div>
-  </div>
+      <p v-if="myTurn" class="ttt-subtext flex flex-row items-center ttt-turn">Your Turn : <img :src="myPiece" class="ttt-icon ml-[0.69rem]" :alt="myPieceValue"> </p>
+      <p v-else class="ttt-subtext flex flex-row items-center ttt-turn"> Opponent's TurN : <img :src="enemyPiece" class="ttt-icon ml-[0.69rem]" :alt="myPieceValue"> </p>
+    </div>
 
     <!--div >
-
-    here is the game
-    {{ phoenixSocketStore.gameState }}
+      {{ phoenixSocketStore.gameState }}
     </div-->
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
+
+import xSvg from '../assets/x.svg'
+import oSvg from '../assets/o.svg'
 
 const phoenixSocketStore = usePhoenixSocketStore();
 
@@ -42,16 +37,34 @@ const route = useRoute();
 const listening = ref(false);
 const loading = ref(false);
 
-onMounted(() => {
-  if (!route.params.gameID && !phoenixSocketStore.gameID) {
-    router.push({ name: "Home" });
-  } else {
-    const routeGameID = route.params.gameID as string;
-    if (!routeGameID) return;
-    phoenixSocketStore.gameID = routeGameID;
-    phoenixSocketStore.createBattleChannel();
-  }
+const gamePieces = ref([
+  { id: "O", icon: oSvg },
+  { id: "X", icon: xSvg}
+]);
+
+const myTurn = computed(() => {
+  return phoenixSocketStore.gameState?.current_player === phoenixSocketStore.userID
 });
+
+const myPieceValue = computed(() => {
+  return getKeyByValue(phoenixSocketStore.gameState?.players, phoenixSocketStore.userID!);
+});
+
+const myPiece = computed(() => {
+  return gamePieces.value.find(piece => piece.id === myPieceValue.value)?.icon;
+});
+
+const enemyPiece = computed(() => {
+  return gamePieces.value.find(piece => piece.id !== myPieceValue.value)?.icon;
+});
+
+const getPieceByValue = (value: string) => {
+  return gamePieces.value.find(piece => piece.id === value)?.icon;
+}
+
+const getKeyByValue = (object: any, value: string) => {
+  return Object.keys(object).find(key => object[key] === value);
+}
 
 watch(
   () => phoenixSocketStore.battleChannel,
@@ -66,10 +79,40 @@ watch(
   },
   { immediate: true, deep: true }
 );
+
+onMounted(() => {
+  if (!route.params.gameID && !phoenixSocketStore.gameID) {
+    router.push({ name: "Home" });
+  } else {
+    const routeGameID = route.params.gameID as string;
+    if (!routeGameID) return;
+    phoenixSocketStore.gameID = routeGameID;
+    phoenixSocketStore.createBattleChannel();
+  }
+});
 </script>
 
 <style>
-.ttt-square{
-  background: var(--Game-Board-BG, rgba(45, 128, 120, 0.20));
+.ttt-square {
+  background: var(--Game-Board-BG);
+}
+
+.ttt-piece{
+  width: 3.75rem;
+  height: 7.0625rem;
+}
+
+.ttt-icon{
+  width: 1.0625rem;
+  height: 2.4375rem;
+}
+.ttt-turn{
+  color: var(--Light-Text);
+  font-family: Gilroy-Light;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: uppercase;
 }
 </style>
