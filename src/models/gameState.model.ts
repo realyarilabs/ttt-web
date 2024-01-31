@@ -8,4 +8,5 @@ export interface GameState {
   winner: string;
   board: string[][];
   current_turn: string;
+  current_player: string;
 }
