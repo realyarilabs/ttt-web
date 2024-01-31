@@ -8,6 +8,11 @@
         <button class="ttt-button btn-1" @click="router.push({ name: 'homepage' })">Return Home</button>
       </div>
     </div>
+    <div class="flex h-full w-full absolute px-14 py-5">
+      <div class="relative flex h-full w-full">
+        <img :src="volumeSvg" class="ttt-icon absolute top-0 right-0 cursor-pointer" alt="volume">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,6 +25,7 @@ import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
 import winSvg from '../assets/end/win.svg'
 import lossSvg from '../assets/end/loss.svg'
 import tieSvg from '../assets/end/tie.svg'
+import volumeSvg from '../assets/volume.svg'
 
 const phoenixSocketStore = usePhoenixSocketStore();
 const router = useRouter();
