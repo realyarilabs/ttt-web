@@ -66,6 +66,7 @@ export const usePhoenixSocketStore = defineStore(
     };
 
     return {
+      userID,
       gameID,
       battleChannel,
       gameState,
