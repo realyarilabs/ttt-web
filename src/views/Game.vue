@@ -1,3 +1,24 @@
+<template>
+  here is the game
+  {{ phoenixSocketStore.gameState }}
+
+  <div v-if="phoenixSocketStore.gameState">
+    <div
+      v-for="(row, i) of phoenixSocketStore.gameState.board"
+      :key="i"
+      class="flex gap-2"
+    >
+      <button
+        v-for="(value, j) of row"
+        :key="j"
+        @click="phoenixSocketStore.executeGameMove(i, j)"
+      >
+        {{ value || "*" }}
+      </button>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -36,24 +57,3 @@ watch(
   { immediate: true, deep: true }
 );
 </script>
-
-<template>
-  here is the game
-  {{ phoenixSocketStore.gameState }}
-
-  <div v-if="phoenixSocketStore.gameState">
-    <div
-      v-for="(row, i) of phoenixSocketStore.gameState.board"
-      :key="i"
-      class="flex gap-2"
-    >
-      <button
-        v-for="(value, j) of row"
-        :key="j"
-        @click="phoenixSocketStore.executeGameMove(i, j)"
-      >
-        {{ value || "*" }}
-      </button>
-    </div>
-  </div>
-</template>
