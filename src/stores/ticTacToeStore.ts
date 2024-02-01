@@ -4,8 +4,8 @@ import { onMounted, ref, watch } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { GameState } from "../models/gameState.model";
 
-export const usePhoenixSocketStore = defineStore(
-  "usePhoenixSocketStore",
+export const useTicTacToeStore = defineStore(
+  "useTicTacToeStore",
   () => {
     const socket = ref<Socket>();
     const battleChannel = ref<Channel>();
@@ -35,7 +35,7 @@ export const usePhoenixSocketStore = defineStore(
     const createBattleChannel = (createGameId?: boolean) => {
       if (!socket.value) return { error: "Socket not initialized" };
       if (createGameId) {
-        gameID.value = uuidv4();
+        gameID.value = uuidv4().slice(0,6);
       }
 
       if (!gameID.value) return { error: "Game ID not initialized" };

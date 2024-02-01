@@ -20,7 +20,7 @@
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
-import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
+import { useTicTacToeStore } from "../stores/ticTacToeStore";
 
 import winSvg from '../assets/end/win.svg'
 import lossSvg from '../assets/end/loss.svg'
@@ -28,7 +28,7 @@ import tieSvg from '../assets/end/tie.svg'
 
 import volumeButton from "../components/volumeButton.vue";
 
-const phoenixSocketStore = usePhoenixSocketStore();
+const ticTacToeStore = useTicTacToeStore();
 const router = useRouter();
 
 const gameEndings = ref({
@@ -38,7 +38,7 @@ const gameEndings = ref({
 });
 
 const isWinner = computed(() => {
-  return phoenixSocketStore.gameState?.winner === phoenixSocketStore.userID
+  return ticTacToeStore.gameState?.winner === ticTacToeStore.userID
 });
 
 const isTie = computed(() => {

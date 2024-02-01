@@ -6,7 +6,7 @@
       <div class="flex flex-col justify-center items-center pt-[3.69rem]">
         <button class="ttt-button btn-1" @click="createGame(true)">CREATE NEW GAME</button>
         <span class="py-5 ttt-or">OR</span>
-        <input class="flex items-center self-stretch ttt-input rounded-md" v-model="phoenixSocketStore.gameID" placeholder="Enter Game ID" />
+        <input class="flex items-center self-stretch ttt-input rounded-md" v-model="ticTacToeStore.gameID" placeholder="Enter Game ID" />
         <button class="ttt-button btn-2 mt-[2.12rem]" @click="createGame()">JOIN EXISTING GAME</button>
       </div>
   </div>
@@ -24,23 +24,23 @@
 </template>
 
 <script setup lang="ts">
-import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
+import { useTicTacToeStore } from "../stores/ticTacToeStore";
 import { useRouter } from "vue-router";
 
 import xSvg from '../assets/x.svg'
 import oSvg from '../assets/o.svg'
 
-const phoenixSocketStore = usePhoenixSocketStore();
+const ticTacToeStore = useTicTacToeStore();
 const router = useRouter();
 
 const createGame = (createGameId?: boolean) => {
-  const response = phoenixSocketStore.createBattleChannel(createGameId);
+  const response = ticTacToeStore.createBattleChannel(createGameId);
   if (response) {
     alert(response.error);
   } else {
     router.push({
       name: "game",
-      params: { gameID: phoenixSocketStore.gameID },
+      params: { gameID: ticTacToeStore.gameID },
     });
   }
 };

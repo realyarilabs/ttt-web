@@ -6,15 +6,15 @@
         Game Code
         <img :src="infoSvg" class="ttt-icon-piece mx-2" alt="info"> :
         <span class="flex flex-row cursor-pointer items-center px-2 underline t-orange" @click="copyCodeToClipboard">
-          {{ phoenixSocketStore.gameID }}
+          {{ ticTacToeStore.gameID }}
           <img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy">
         </span>
       </div>
-      <div v-if="phoenixSocketStore.gameState" class="flex flex-col justify-center items-center pt-[3.69rem]">
-        <div v-for="(row, i) of phoenixSocketStore.gameState.board" :key="i" class="flex gap-[0.94rem] pb-[0.94rem]">
+      <div v-if="ticTacToeStore.gameState" class="flex flex-col justify-center items-center pt-[3.69rem]">
+        <div v-for="(row, i) of ticTacToeStore.gameState.board" :key="i" class="flex gap-[0.94rem] pb-[0.94rem]">
           <button v-for="(value, j) of row" :key="j"
             class="ttt-square w-[8.125rem] h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
-            @click="phoenixSocketStore.executeGameMove(i, j)">
+            @click="ticTacToeStore.executeGameMove(i, j)">
             <img v-if="value" :src="getPieceByValue(value)" class="ttt-piece" :alt="value">
           </button>
         </div>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <!--div >
-      {{ phoenixSocketStore.gameState }}
+      {{ ticTacToeStore.gameState }}
     </div-->
   </div>
 </template>
@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { usePhoenixSocketStore } from "../stores/phoenixSocketStore";
+import { useTicTacToeStore } from "../stores/ticTacToeStore";
 
 import xSvg from '../assets/x.svg'
 import oSvg from '../assets/o.svg'
@@ -49,7 +49,7 @@ import infoSvg from '../assets/info.svg'
 
 import volumeButton from "../components/volumeButton.vue";
 
-const phoenixSocketStore = usePhoenixSocketStore();
+const ticTacToeStore = useTicTacToeStore();
 
 const router = useRouter();
 const route = useRoute();
@@ -63,11 +63,11 @@ const gamePieces = ref([
 ]);
 
 const myTurn = computed(() => {
-  return phoenixSocketStore.gameState?.current_player === phoenixSocketStore.userID
+  return ticTacToeStore.gameState?.current_player === ticTacToeStore.userID
 });
 
 const myPieceValue = computed(() => {
-  return getKeyByValue(phoenixSocketStore.gameState?.players, phoenixSocketStore.userID!);
+  return getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.userID!);
 });
 
 const myPiece = computed(() => {
@@ -87,13 +87,13 @@ const getKeyByValue = (object: any, value: string) => {
 }
 
 const copyCodeToClipboard = () => {
-  return navigator.clipboard.writeText(phoenixSocketStore.gameID!);
+  return navigator.clipboard.writeText(ticTacToeStore.gameID!);
 }
 
 watch(
-  () => phoenixSocketStore.battleChannel,
+  () => ticTacToeStore.battleChannel,
   () => {
-    if (!phoenixSocketStore.battleChannel || listening.value || loading.value)
+    if (!ticTacToeStore.battleChannel || listening.value || loading.value)
       return;
 
     loading.value = true;
@@ -105,13 +105,13 @@ watch(
 );
 
 onMounted(() => {
-  if (!route.params.gameID && !phoenixSocketStore.gameID) {
+  if (!route.params.gameID && !ticTacToeStore.gameID) {
     router.push({ name: "Home" });
   } else {
     const routeGameID = route.params.gameID as string;
     if (!routeGameID) return;
-    phoenixSocketStore.gameID = routeGameID;
-    phoenixSocketStore.createBattleChannel();
+    ticTacToeStore.gameID = routeGameID;
+    ticTacToeStore.createBattleChannel();
   }
 });
 </script>
