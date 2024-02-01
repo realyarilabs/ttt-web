@@ -15,6 +15,14 @@
           {{ copied ? "Copied" : ticTacToeStore.gameID }}
           <img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy" />
         </button>
+        /
+        <button
+          class="flex flex-row cursor-pointer items-center px-2 underline t-orange"
+          @click="linkCopy()"
+        >
+          {{ linkCopied ? "Copied" : "Link" }}
+          <img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy" />
+        </button>
       </div>
       <div class="flex flex-col justify-center items-center pt-[3.69rem]">
         <div
@@ -97,6 +105,11 @@ const route = useRoute();
 
 const { copy, copied } = useClipboard({
   source: ticTacToeStore.gameID!,
+  legacy: true,
+});
+
+const { copy: linkCopy, copied: linkCopied } = useClipboard({
+  source: window.location.href,
   legacy: true,
 });
 
