@@ -71,13 +71,35 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
     matchChannel.value.push("move", { x, y });
   };
 
-  return {
-    userID,
-    gameID,
-    matchChannel,
-    gameState,
-    leaveMatchChannel,
-    createMatchChannel,
-    executeGameMove,
-  };
-});
+    const leaveMatchChannel = () => {
+      if (!matchChannel.value) {
+        throw new Error("Matchmaking channel not initialized");
+      }
+      matchChannel.value.leave();
+      matchChannel.value = undefined;
+    };
+
+    const executeGameMove = (x: number, y: number) => {
+      if (!matchChannel.value) {
+        throw new Error("Matchmaking channel not initialized");
+      }
+      matchChannel.value.push("move", { x, y });
+    };
+
+    const endGame = () => {
+      gameID.value = "";
+      gameState.value = undefined;
+    };
+
+    return {
+      userID,
+      gameID,
+      matchChannel,
+      gameState,
+      leaveMatchChannel,
+      createMatchChannel,
+      executeGameMove,
+      endGame
+    };
+  }
+);
