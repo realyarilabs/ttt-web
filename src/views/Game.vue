@@ -31,7 +31,7 @@
             <img
               v-if="value"
               :src="getPieceByValue(value)"
-              class="ttt-piece"
+              class="sm:h-8 sm:w-8 md:ttt-piece"
               :alt="value"
             />
           </button>
