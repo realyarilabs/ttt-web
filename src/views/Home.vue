@@ -3,7 +3,7 @@
     class="h-screen w-screen flex items-center justify-center bg-ttt ttt-grid"
   >
     <div class="flex flex-col justify-center items-center z-10">
-      <h1 class="ttt-h1 pb-2">TIC TAC TOE CHALLENGE !</h1>
+      <h1 class="ttt-h1 pb-2 text-center">TIC TAC TOE CHALLENGE !</h1>
       <p class="ttt-subtext">Ready for a game of Xs and Os ?</p>
       <div class="flex flex-col justify-center items-center pt-[3.69rem]">
       <input
