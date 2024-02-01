@@ -41,14 +41,13 @@ export const useTicTacToeStore = defineStore(
       if (!gameID.value) return { error: "Game ID not initialized" };
 
       battleChannel.value = socket.value.channel(
-        "games:battles:" + gameID.value
+        "games:match:" + gameID.value
       );
       battleChannel.value.on("game_state_sent", (payload) => {
         gameState.value = payload;
       });
 
       battleChannel.value.join();
-      console.log('connected')
     };
 
     const leaveBattleChannel = () => {
