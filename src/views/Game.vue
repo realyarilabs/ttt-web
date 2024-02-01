@@ -25,13 +25,13 @@
           <button
             v-for="(value, j) of row"
             :key="j"
-            class="ttt-square w-[8.125rem] h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
+            class="w-20 h-20 ttt-square md:w-[8.125rem] md:h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
             @click="ticTacToeStore.executeGameMove(i, j)"
           >
             <img
               v-if="value"
               :src="getPieceByValue(value)"
-              class="ttt-piece"
+              class="sm:h-8 sm:w-8 md:h-28 md:w-[3.75rem]"
               :alt="value"
             />
           </button>
@@ -176,11 +176,6 @@ onBeforeMount(() => {
 <style>
 .ttt-square {
   background: var(--Game-Board-BG);
-}
-
-.ttt-piece {
-  width: 3.75rem;
-  height: 7.0625rem;
 }
 
 .ttt-icon-piece {

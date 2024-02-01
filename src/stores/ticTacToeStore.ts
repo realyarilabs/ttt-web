@@ -8,8 +8,8 @@ import soundO from "../assets/audio/soundo.wav";
 import { Move } from "../models/move.model";
 import { useAudioStore } from "./audioStore";
 
-const serverUrl = import.meta.env.SERVER_URL
-  ? import.meta.env.SERVER_URL
+const serverUrl = import.meta.env.VITE_SERVER_URL
+  ? import.meta.env.VITE_SERVER_URL
   : "ws://localhost:4000/socket";
 
 export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {

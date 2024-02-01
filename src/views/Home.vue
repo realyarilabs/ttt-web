@@ -3,7 +3,7 @@
     class="h-screen w-screen flex items-center justify-center bg-ttt ttt-grid"
   >
     <div class="flex flex-col justify-center items-center z-10">
-      <h1 class="ttt-h1 pb-2">TIC TAC TOE CHALLENGE !</h1>
+      <h1 class="ttt-h1 pb-2 text-center">TIC TAC TOE CHALLENGE !</h1>
       <p class="ttt-subtext">Ready for a game of Xs and Os ?</p>
       <div class="flex flex-col justify-center items-center pt-[3.69rem]">
       <input
@@ -11,7 +11,7 @@
         v-model="ticTacToeStore.userName"
         placeholder="Enter Your Name (optional)"
       />
-      <hr class="w-[150%] solid mb-4 mt-6"/>
+      <hr class="w-full md:w-[150%] solid mb-4 mt-6"/>
         <button class="ttt-button btn-1 mt-5" @click="createGame(true)">
           CREATE NEW GAME
         </button>
