@@ -28,13 +28,15 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { GameState } from "../models/gameState.model";
 import { useTicTacToeStore } from "../stores/ticTacToeStore";
-
+import { useAudioStore } from "../stores/audioStore";
+import soundWin from "../assets/audio/soundWin.wav";
+import soundLose from "../assets/audio/soundLose.wav";
 import winSvg from "../assets/end/win.svg";
 import lossSvg from "../assets/end/loss.svg";
 import tieSvg from "../assets/end/tie.svg";
-
 import volumeButton from "../components/volumeButton.vue";
 
+const audioStore = useAudioStore();
 const ticTacToeStore = useTicTacToeStore();
 const router = useRouter();
 
@@ -64,6 +66,9 @@ onMounted(() => {
     ticTacToeStore.gameState = payload;
   });
   ticTacToeStore.endGame();
+
+  if (winner) audioStore.playSound(soundWin);
+  else audioStore.playSound(soundLose);
 });
 </script>
 
