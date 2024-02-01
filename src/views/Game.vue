@@ -10,9 +10,9 @@
         <img :src="infoSvg" class="ttt-icon-piece mx-2" alt="info" /> :
         <button
           class="flex flex-row cursor-pointer items-center px-2 underline t-orange"
-          @click="copyCodeToClipboard"
+          @click="copy()"
         >
-          {{ ticTacToeStore.gameID }}
+          {{ copied ? "Copied" : ticTacToeStore.gameID }}
           <img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy" />
         </button>
       </div>
@@ -88,11 +88,17 @@ import exitSvg from "../assets/exit.svg";
 import copySvg from "../assets/copy.svg";
 import infoSvg from "../assets/info.svg";
 import volumeButton from "../components/volumeButton.vue";
+import { useClipboard } from "@vueuse/core";
 
 const ticTacToeStore = useTicTacToeStore();
 
 const router = useRouter();
 const route = useRoute();
+
+const { copy, copied } = useClipboard({
+  source: ticTacToeStore.gameID!,
+  legacy: true,
+});
 
 const gamePieces: {
   id: string;
@@ -142,10 +148,6 @@ const getPieceByValue = (value: string) => {
 
 const getKeyByValue = (object: any, value: string) => {
   return Object.keys(object).find((key) => object[key] === value);
-};
-
-const copyCodeToClipboard = () => {
-  return navigator.clipboard.writeText(ticTacToeStore.gameID!);
 };
 
 const leaveMatch = () => {

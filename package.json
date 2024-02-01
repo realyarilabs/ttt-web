@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/uuid": "^9.0.8",
+    "@vueuse/core": "^10.7.2",
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
     "vue": "^3.3.11",
