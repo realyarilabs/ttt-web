@@ -69,7 +69,7 @@
           :src="exitSvg"
           class="ttt-icon absolute top-0 left-0 cursor-pointer"
           alt="exit"
-          @click="router.push({ name: 'homepage' })"
+          @click="leaveMatch"
         />
         <volumeButton />
       </div>
@@ -145,6 +145,11 @@ const getKeyByValue = (object: any, value: string) => {
 
 const copyCodeToClipboard = () => {
   return navigator.clipboard.writeText(ticTacToeStore.gameID!);
+};
+
+const leaveMatch = () => {
+  ticTacToeStore.leaveMatch();
+  router.push({ name: "homepage" });
 };
 
 watch(

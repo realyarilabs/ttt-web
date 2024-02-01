@@ -69,6 +69,13 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
     matchChannel.value = undefined;
   };
 
+  const leaveMatch = () => {
+    matchChannel.value?.push("surrender", {});
+    leaveMatchChannel();
+    gameID.value = undefined;
+    gameState.value = undefined;
+  };
+
   const executeGameMove = (x: number, y: number) => {
     if (!matchChannel.value) {
       throw new Error("Matchmaking channel not initialized");
@@ -96,6 +103,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
     gameState,
     leaveMatchChannel,
     createMatchChannel,
+    leaveMatch,
     executeGameMove,
     playAgain,
     endGame,
