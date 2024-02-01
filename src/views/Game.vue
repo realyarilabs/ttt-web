@@ -37,10 +37,10 @@
           </button>
         </div>
       </div>
-      <p v-if="myTurn" class="ttt-subtext flex flex-row items-center ttt-turn">Your Turn : <img :src="myPiece"
-          class="ttt-icon-piece ml-[0.69rem]" :alt="myPieceValue"> </p>
-      <p v-else-if="ticTacToeStore.gameState.current_player !== null" class="ttt-subtext flex flex-row items-center ttt-turn"> {{ isSpectator ? "" : "Opponent's"}} Turn : <img :src="enemyPiece"
-          class="ttt-icon-piece ml-[0.69rem]" :alt="myPieceValue"> </p>
+      <p v-if="isSpectator" class="ttt-subtext flex flex-row items-center ttt-turn">Turn : <img :src="currentPiece"
+          class="ttt-icon-piece ml-[0.69rem]" :alt="pieceValue"> </p>
+      <p v-else-if="ticTacToeStore.gameState.current_player !== null" class="ttt-subtext flex flex-row items-center ttt-turn"> {{ myTurn ? "Your" : "Opponent's" }} Turn : <img :src="currentPiece"
+          class="ttt-icon-piece ml-[0.69rem]" :alt="pieceValue"> </p>
       <p v-else class="ttt-subtext flex flex-row items-center ttt-turn">Waiting for opponent</p>
     </div>
     <div class="flex h-full w-full absolute px-14 py-5">
@@ -79,28 +79,21 @@ const gamePieces = [
   { id: "X", icon: xSvg }
 ];
 
+const isSpectator = computed(() => {
+  return getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.userID!) === undefined
+});
+
 const myTurn = computed(() => {
   return ticTacToeStore.gameState?.current_player === ticTacToeStore.userID;
 });
 
-const myPieceValue = computed(() => {
-  if (!ticTacToeStore.gameState) return;
-  return getKeyByValue(
-    ticTacToeStore.gameState?.players,
-    ticTacToeStore.userID!
-  );
+const pieceValue = computed(() => {
+  return getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.gameState?.current_player!);
 });
 
-const myPiece = computed(() => {
-  return gamePieces.find(piece => piece.id === myPieceValue.value)?.icon;
-});
 
-const enemyPiece = computed(() => {
-  return gamePieces.find(piece => piece.id !== myPieceValue.value)?.icon;
-});
-
-const isSpectator = computed(() => {
-  return getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.userID!) === undefined
+const currentPiece = computed(() => {
+  return gamePieces.find(piece => piece.id === pieceValue.value)?.icon;
 });
 
 const getPieceByValue = (value: string) => {
