@@ -25,7 +25,7 @@
           <button
             v-for="(value, j) of row"
             :key="j"
-            class="ttt-square w-[8.125rem] h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
+            class="w-20 h-20 ttt-square md:w-[8.125rem] md:h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
             @click="ticTacToeStore.executeGameMove(i, j)"
           >
             <img
