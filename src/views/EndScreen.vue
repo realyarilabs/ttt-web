@@ -4,11 +4,11 @@
       <h1 class="ttt-h1 pb-2">GAME OVER</h1>
       <img :src="showGraphics" alt="end graphics" class="my-8 md:mt-24 md:mb-20 ttt-rem" />
       <div class="flex flex-col md:flex-row gap-4 md:gap-[3.12rem]">
-        <button class="ttt-button btn-2" @click="ticTacToeStore.playAgain()">
+        <button class="sm:w-40 ttt-button btn-2" @click="ticTacToeStore.playAgain()">
           Play Again
         </button>
         <button
-          class="ttt-button btn-1"
+          class="sm:w-40 ttt-button btn-1"
           @click="router.push({ name: 'homepage' })"
         >
           Return Home

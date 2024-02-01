@@ -11,7 +11,7 @@
         v-model="ticTacToeStore.userName"
         placeholder="Enter Your Name (optional)"
       />
-      <hr class="w-[150%] solid mb-4 mt-6"/>
+      <hr class="w-full md:w-[150%] solid mb-4 mt-6"/>
         <button class="ttt-button btn-1 mt-5" @click="createGame(true)">
           CREATE NEW GAME
         </button>

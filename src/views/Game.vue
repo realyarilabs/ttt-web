@@ -31,7 +31,7 @@
             <img
               v-if="value"
               :src="getPieceByValue(value)"
-              class="sm:h-8 sm:w-8 md:ttt-piece"
+              class="sm:h-8 sm:w-8 md:h-28 md:w-[3.75rem]"
               :alt="value"
             />
           </button>
@@ -171,11 +171,6 @@ onBeforeMount(() => {
 <style>
 .ttt-square {
   background: var(--Game-Board-BG);
-}
-
-.ttt-piece {
-  width: 3.75rem;
-  height: 7.0625rem;
 }
 
 .ttt-icon-piece {
