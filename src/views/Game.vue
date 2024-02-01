@@ -74,14 +74,11 @@
         <volumeButton />
       </div>
     </div>
-    <!--div >
-      {{ ticTacToeStore.gameState }}
-    </div-->
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onBeforeMount } from "vue";
+import { watch, computed, onBeforeMount } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useTicTacToeStore } from "../stores/ticTacToeStore";
 import xSvg from "../assets/x.svg";
@@ -95,9 +92,6 @@ const ticTacToeStore = useTicTacToeStore();
 
 const router = useRouter();
 const route = useRoute();
-
-const listening = ref(false);
-const loading = ref(false);
 
 const gamePieces: {
   id: string;
@@ -151,20 +145,6 @@ const getKeyByValue = (object: any, value: string) => {
 const copyCodeToClipboard = () => {
   return navigator.clipboard.writeText(ticTacToeStore.gameID!);
 };
-
-watch(
-  () => ticTacToeStore.matchChannel,
-  () => {
-    if (!ticTacToeStore.matchChannel || listening.value || loading.value)
-      return;
-
-    loading.value = true;
-    listening.value = true;
-
-    loading.value = false;
-  },
-  { immediate: true, deep: true }
-);
 
 watch(
   () => ticTacToeStore.gameState?.status,
