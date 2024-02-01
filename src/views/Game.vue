@@ -103,8 +103,9 @@ const gamePieces: {
 ];
 
 const isSpectator = computed(() => {
+  if (!ticTacToeStore.gameState) return;
   return (
-    getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.userID!) ===
+    getKeyByValue(ticTacToeStore.gameState.players, ticTacToeStore.userID!) ===
     undefined
   );
 });
@@ -114,10 +115,10 @@ const myTurn = computed(() => {
 });
 
 const pieceValue = computed(() => {
-  if (!ticTacToeStore.gameState?.players) return;
+  if (!ticTacToeStore.gameState) return;
   return getKeyByValue(
-    ticTacToeStore.gameState?.players,
-    ticTacToeStore.gameState?.current_player!
+    ticTacToeStore.gameState.players,
+    ticTacToeStore.gameState.current_player!
   );
 });
 

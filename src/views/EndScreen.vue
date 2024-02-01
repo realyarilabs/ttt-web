@@ -26,7 +26,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { GameState } from "../models/gameState.model";
 import { useTicTacToeStore } from "../stores/ticTacToeStore";
 import { useAudioStore } from "../stores/audioStore";
 import soundWin from "../assets/audio/soundWin.wav";
@@ -60,12 +59,13 @@ onMounted(() => {
     router.push({ name: "homepage" });
     return;
   }
+  const gameID = ticTacToeStore.gameID;
 
-  ticTacToeStore.matchChannel.on("play_again", (payload: GameState) => {
-    router.push({ name: "game", params: { gameID: ticTacToeStore.gameID } });
-    ticTacToeStore.gameState = payload;
-  });
   ticTacToeStore.endGame();
+
+  ticTacToeStore.matchChannel.on("play_again", () => {
+    router.push({ name: "game", params: { gameID } });
+  });
 
   if (winner) audioStore.playSound(soundWin);
   else audioStore.playSound(soundLose);

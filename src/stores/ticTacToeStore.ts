@@ -84,6 +84,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
   };
 
   const endGame = () => {
+    gameID.value = undefined;
     gameState.value = undefined;
   };
 
