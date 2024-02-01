@@ -92,9 +92,9 @@ const copyCodeToClipboard = () => {
 }
 
 watch(
-  () => ticTacToeStore.battleChannel,
+  () => ticTacToeStore.matchChannel,
   () => {
-    if (!ticTacToeStore.battleChannel || listening.value || loading.value)
+    if (!ticTacToeStore.matchChannel || listening.value || loading.value)
       return;
 
     loading.value = true;
@@ -112,7 +112,7 @@ onBeforeMount(() => {
     const routeGameID = route.params.gameID as string;
     if (!routeGameID) return;
     ticTacToeStore.gameID = routeGameID;
-    ticTacToeStore.createBattleChannel();
+    ticTacToeStore.createMatchChannel();
   }
 });
 </script>

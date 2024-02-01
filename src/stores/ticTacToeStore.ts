@@ -10,7 +10,7 @@ export const useTicTacToeStore = defineStore(
   "useTicTacToeStore",
   () => {
     const socket = ref<Socket>();
-    const battleChannel = ref<Channel>();
+    const matchChannel = ref<Channel>();
     const userID = ref<string>();
     const gameID = ref<string>();
     const gameState = ref<GameState>();
@@ -32,7 +32,7 @@ export const useTicTacToeStore = defineStore(
 
     });
 
-    const createBattleChannel = (createGameId?: boolean) => {
+    const createMatchChannel = (createGameId?: boolean) => {
       if (!socket.value) return { error: "Socket not initialized" };
       if (createGameId) {
         gameID.value = uuidv4().slice(0,6);
@@ -40,38 +40,38 @@ export const useTicTacToeStore = defineStore(
 
       if (!gameID.value) return { error: "Game ID not initialized" };
 
-      battleChannel.value = socket.value.channel(
+      matchChannel.value = socket.value.channel(
         "games:match:" + gameID.value
       );
-      battleChannel.value.on("game_state_sent", (payload) => {
+      matchChannel.value.on("game_state_sent", (payload) => {
         gameState.value = payload;
       });
 
-      battleChannel.value.join();
+      matchChannel.value.join();
     };
 
-    const leaveBattleChannel = () => {
-      if (!battleChannel.value) {
+    const leaveMatchChannel = () => {
+      if (!matchChannel.value) {
         throw new Error("Matchmaking channel not initialized");
       }
-      battleChannel.value.leave();
-      battleChannel.value = undefined;
+      matchChannel.value.leave();
+      matchChannel.value = undefined;
     };
 
     const executeGameMove = (x: number, y: number) => {
-      if (!battleChannel.value) {
+      if (!matchChannel.value) {
         throw new Error("Matchmaking channel not initialized");
       }
-      battleChannel.value.push("move", { x, y });
+      matchChannel.value.push("move", { x, y });
     };
 
     return {
       userID,
       gameID,
-      battleChannel,
+      matchChannel,
       gameState,
-      leaveBattleChannel,
-      createBattleChannel,
+      leaveMatchChannel,
+      createMatchChannel,
       executeGameMove,
     };
   }

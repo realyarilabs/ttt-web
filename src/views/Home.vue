@@ -34,7 +34,7 @@ const ticTacToeStore = useTicTacToeStore();
 const router = useRouter();
 
 const createGame = (createGameId?: boolean) => {
-  const response = ticTacToeStore.createBattleChannel(createGameId);
+  const response = ticTacToeStore.createMatchChannel(createGameId);
   if (response) {
     alert(response.error);
   } else {
