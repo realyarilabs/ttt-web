@@ -41,7 +41,7 @@
         v-if="isSpectator"
         class="ttt-subtext flex flex-row items-center ttt-turn"
       >
-        Turn :
+       {{ currentPlayerName }} Turn :
         <img
           :src="currentPiece"
           class="ttt-icon-piece ml-[0.69rem]"
@@ -52,7 +52,7 @@
         v-else-if="ticTacToeStore.gameState.current_player !== null"
         class="ttt-subtext flex flex-row items-center ttt-turn"
       >
-        {{ myTurn ? "Your" : "Opponent's" }} Turn :
+        {{ myTurn ? "Your" : currentPlayerName }} Turn :
         <img
           :src="currentPiece"
           class="ttt-icon-piece ml-[0.69rem]"
@@ -100,8 +100,8 @@ const listening = ref(false);
 const loading = ref(false);
 
 const gamePieces = [
-  { id: "O", icon: oSvg },
-  { id: "X", icon: xSvg },
+  { id: "O", icon: oSvg, name: "player_2" },
+  { id: "X", icon: xSvg, name: "player_1" },
 ];
 
 const isSpectator = computed(() => {
@@ -123,8 +123,18 @@ const pieceValue = computed(() => {
   );
 });
 
+const currentPlayerInfo = computed(() => {
+  return gamePieces.find((piece) => piece.id === pieceValue.value);
+});
+
+
 const currentPiece = computed(() => {
-  return gamePieces.find((piece) => piece.id === pieceValue.value)?.icon;
+  return currentPlayerInfo.value?.icon;
+});
+
+const currentPlayerName = computed(() => {
+  if(!currentPlayerInfo.value || !ticTacToeStore.gameState) return "";
+  return ticTacToeStore.gameState[currentPlayerInfo.value?.name];
 });
 
 const getPieceByValue = (value: string) => {
