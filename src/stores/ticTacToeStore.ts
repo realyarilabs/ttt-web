@@ -7,7 +7,7 @@ import soundX from "../assets/audio/soundx.wav";
 import soundO from "../assets/audio/soundo.wav";
 import { Move } from "../models/move.model";
 
-const serverUrl = "ws://localhost:4000/socket";
+const serverUrl = import.meta.env.SERVER_URL ? import.meta.env.SERVER_URL : "ws://localhost:4000/socket";
 
 export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
   const socket = ref<Socket>();
