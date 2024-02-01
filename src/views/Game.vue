@@ -91,7 +91,6 @@ const pieceValue = computed(() => {
   return getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.gameState?.current_player!);
 });
 
-
 const currentPiece = computed(() => {
   return gamePieces.find(piece => piece.id === pieceValue.value)?.icon;
 });
