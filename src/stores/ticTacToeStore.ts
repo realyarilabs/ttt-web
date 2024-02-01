@@ -6,10 +6,15 @@ import { GameState } from "../models/gameState.model";
 import soundX from "../assets/audio/soundx.wav";
 import soundO from "../assets/audio/soundo.wav";
 import { Move } from "../models/move.model";
+import { useAudioStore } from "./audioStore";
 
-const serverUrl = import.meta.env.SERVER_URL ? import.meta.env.SERVER_URL : "ws://localhost:4000/socket";
+const serverUrl = import.meta.env.SERVER_URL
+  ? import.meta.env.SERVER_URL
+  : "ws://localhost:4000/socket";
 
 export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
+  const audioStore = useAudioStore();
+
   const socket = ref<Socket>();
   const matchChannel = ref<Channel>();
   const userID = ref<string>();
@@ -41,17 +46,16 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 
     if (!gameID.value) return { error: "Game ID not initialized" };
 
-    matchChannel.value = socket.value.channel("games:match:" + gameID.value, {name: userName.value });
+    matchChannel.value = socket.value.channel("games:match:" + gameID.value, {
+      name: userName.value,
+    });
     matchChannel.value.on("game_state_sent", (payload) => {
       gameState.value = payload;
     });
 
     matchChannel.value.on("move_made", (payload: Move) => {
-      if (payload.symbol === "X") {
-        new Audio(soundX).play();
-      } else {
-        new Audio(soundO).play();
-      }
+      if (payload.symbol === "X") audioStore.playSound(soundX);
+      else audioStore.playSound(soundO);
     });
 
     matchChannel.value.join();
