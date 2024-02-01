@@ -6,7 +6,12 @@
       <h1 class="ttt-h1 pb-2">TIC TAC TOE CHALLENGE !</h1>
       <p class="ttt-subtext">Ready for a game of Xs and Os ?</p>
       <div class="flex flex-col justify-center items-center pt-[3.69rem]">
-        <button class="ttt-button btn-1" @click="createGame(true)">
+      <input
+        class="flex items-center self-stretch ttt-input rounded-md"
+        v-model="ticTacToeStore.userName"
+        placeholder="Enter Your Name"
+      />
+        <button class="ttt-button btn-1 mt-5" @click="createGame(true)">
           CREATE NEW GAME
         </button>
         <span class="py-5 ttt-or">OR</span>

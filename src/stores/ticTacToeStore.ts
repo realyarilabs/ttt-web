@@ -13,6 +13,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
   const socket = ref<Socket>();
   const matchChannel = ref<Channel>();
   const userID = ref<string>();
+  const userName = ref<string>();
   const gameID = ref<string>();
   const gameState = ref<GameState>();
 
@@ -40,7 +41,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 
     if (!gameID.value) return { error: "Game ID not initialized" };
 
-    matchChannel.value = socket.value.channel("games:match:" + gameID.value);
+    matchChannel.value = socket.value.channel("games:match:" + gameID.value, {name: userName.value });
     matchChannel.value.on("game_state_sent", (payload) => {
       gameState.value = payload;
     });
@@ -84,6 +85,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 
   return {
     userID,
+    userName,
     gameID,
     matchChannel,
     gameState,
