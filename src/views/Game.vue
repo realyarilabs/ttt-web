@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen w-screen flex items-center justify-center bg-ttt">
-    <div class="flex flex-col justify-center items-center z-10">
+    <div v-if="ticTacToeStore.gameState" class="flex flex-col justify-center items-center z-10">
       <h1 class="ttt-h1 pb-2">GAME ON !</h1>
       <div class="ttt-subtext flex flex-row justify-center items-center">
         Game Code
@@ -10,7 +10,7 @@
           <img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy">
         </span>
       </div>
-      <div v-if="ticTacToeStore.gameState" class="flex flex-col justify-center items-center pt-[3.69rem]">
+      <div class="flex flex-col justify-center items-center pt-[3.69rem]">
         <div v-for="(row, i) of ticTacToeStore.gameState.board" :key="i" class="flex gap-[0.94rem] pb-[0.94rem]">
           <button v-for="(value, j) of row" :key="j"
             class="ttt-square w-[8.125rem] h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch, computed } from "vue";
+import { ref, watch, computed, onBeforeMount } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useTicTacToeStore } from "../stores/ticTacToeStore";
 
@@ -67,6 +67,7 @@ const myTurn = computed(() => {
 });
 
 const myPieceValue = computed(() => {
+  if(!ticTacToeStore.gameState) return
   return getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.userID!);
 });
 
@@ -104,7 +105,7 @@ watch(
   { immediate: true, deep: true }
 );
 
-onMounted(() => {
+onBeforeMount(() => {
   if (!route.params.gameID && !ticTacToeStore.gameID) {
     router.push({ name: "Home" });
   } else {
