@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, onActivated } from "vue";
 import { useRouter } from "vue-router";
 
 import { useTicTacToeStore } from "../stores/ticTacToeStore";
@@ -37,18 +37,13 @@ const gameEndings = ref({
   "tie": tieSvg
 });
 
-const isWinner = computed(() => {
-  return ticTacToeStore.gameState?.winner === ticTacToeStore.userID
-});
+const Winner = ticTacToeStore.gameState?.winner === ticTacToeStore.userID;
+const isTie = ticTacToeStore.gameState?.winner === "draw";
 
-const isTie = computed(() => {
-  return false
-});
+const showGraphics = isTie ? gameEndings.value["tie"] : (Winner ? gameEndings.value["win"] : gameEndings.value["loss"]);
 
-const showGraphics = computed(() => {
-  if(isTie.value)
-    return gameEndings.value["tie"]
-  return isWinner.value ? gameEndings.value["win"] : gameEndings.value["loss"]
+onActivated(() => {
+  console.log("reset state")
 });
 
 </script>
