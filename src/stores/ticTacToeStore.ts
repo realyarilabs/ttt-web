@@ -56,36 +56,41 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
     matchChannel.value.join();
   };
 
+  const leaveMatchChannel = () => {
+    if (!matchChannel.value) {
+      throw new Error("Matchmaking channel not initialized");
+    }
+    matchChannel.value.leave();
+    matchChannel.value = undefined;
+  };
 
-    const leaveMatchChannel = () => {
-      if (!matchChannel.value) {
-        throw new Error("Matchmaking channel not initialized");
-      }
-      matchChannel.value.leave();
-      matchChannel.value = undefined;
-    };
+  const executeGameMove = (x: number, y: number) => {
+    if (!matchChannel.value) {
+      throw new Error("Matchmaking channel not initialized");
+    }
+    matchChannel.value.push("move", { x, y });
+  };
 
-    const executeGameMove = (x: number, y: number) => {
-      if (!matchChannel.value) {
-        throw new Error("Matchmaking channel not initialized");
-      }
-      matchChannel.value.push("move", { x, y });
-    };
+  const playAgain = () => {
+    if (!matchChannel.value) {
+      throw new Error("Matchmaking channel not initialized");
+    }
+    matchChannel.value.push("play_again", {});
+  };
 
-    const endGame = () => {
-      gameID.value = "";
-      gameState.value = undefined;
-    };
+  const endGame = () => {
+    gameState.value = undefined;
+  };
 
-    return {
-      userID,
-      gameID,
-      matchChannel,
-      gameState,
-      leaveMatchChannel,
-      createMatchChannel,
-      executeGameMove,
-      endGame
-    };
-  }
-);
+  return {
+    userID,
+    gameID,
+    matchChannel,
+    gameState,
+    leaveMatchChannel,
+    createMatchChannel,
+    executeGameMove,
+    playAgain,
+    endGame,
+  };
+});
