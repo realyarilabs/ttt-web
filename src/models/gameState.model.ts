@@ -9,4 +9,6 @@ export interface GameState {
   board: string[][];
   current_turn: string;
   current_player: string;
+  player_1: string;
+  player_2: string;
 }

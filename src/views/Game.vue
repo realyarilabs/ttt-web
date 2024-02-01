@@ -133,6 +133,7 @@ const currentPiece = computed(() => {
 });
 
 const currentPlayerName = computed(() => {
+  if(!currentPlayerInfo.value || !ticTacToeStore.gameState) return "";
   return ticTacToeStore.gameState[currentPlayerInfo.value?.name];
 });
 
