@@ -2,14 +2,21 @@
   <div class="h-screen w-screen flex items-center justify-center bg-ttt">
     <div class="flex flex-col justify-center items-center z-10">
       <h1 class="ttt-h1 pb-2">GAME OVER</h1>
-      <img :src="showGraphics" alt="end graphics" class="my-8 md:mt-24 md:mb-20 ttt-rem" />
+      <img
+        :src="showGraphics"
+        alt="end graphics"
+        class="my-8 md:mt-24 md:mb-20 ttt-rem"
+      />
       <div class="flex flex-col md:flex-row gap-4 md:gap-[3.12rem]">
-        <button class="sm:w-40 ttt-button btn-2" @click="ticTacToeStore.playAgain()">
+        <button
+          class="sm:w-40 ttt-button btn-2"
+          @click="ticTacToeStore.playAgain()"
+        >
           Play Again
         </button>
         <button
           class="sm:w-40 ttt-button btn-1"
-          @click="router.push({ name: 'homepage' })"
+          @click="$router.push({ name: 'homepage' })"
         >
           Return Home
         </button>

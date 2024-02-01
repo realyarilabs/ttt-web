@@ -8,13 +8,13 @@
       <div class="ttt-subtext flex flex-row justify-center items-center">
         Game Code
         <img :src="infoSvg" class="ttt-icon-piece mx-2" alt="info" /> :
-        <span
+        <button
           class="flex flex-row cursor-pointer items-center px-2 underline t-orange"
           @click="copyCodeToClipboard"
         >
           {{ ticTacToeStore.gameID }}
           <img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy" />
-        </span>
+        </button>
       </div>
       <div class="flex flex-col justify-center items-center pt-[3.69rem]">
         <div
@@ -65,12 +65,13 @@
     </div>
     <div class="flex h-full w-full absolute px-14 py-5">
       <div class="relative flex h-full w-full">
-        <img
-          :src="exitSvg"
-          class="ttt-icon absolute top-0 left-0 cursor-pointer"
-          alt="exit"
-          @click="leaveMatch"
-        />
+        <button @click="leaveMatch">
+          <img
+            :src="exitSvg"
+            class="ttt-icon absolute top-0 left-0 cursor-pointer"
+            alt="exit"
+          />
+        </button>
         <volumeButton />
       </div>
     </div>
