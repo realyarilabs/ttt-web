@@ -143,6 +143,15 @@ watch(
   { immediate: true, deep: true }
 );
 
+watch(
+  () => ticTacToeStore.gameState?.status,
+  () => {
+  if(ticTacToeStore.gameState?.status === "game_over")
+    router.push({name: "end"})
+  },
+  { immediate: true, deep: true }
+);
+
 onBeforeMount(() => {
   if (!route.params.gameID && !ticTacToeStore.gameID) {
     router.push({ name: "Home" });
