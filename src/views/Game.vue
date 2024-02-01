@@ -41,7 +41,7 @@
         v-if="isSpectator"
         class="ttt-subtext flex flex-row items-center ttt-turn"
       >
-       {{ currentPlayerName }} Turn :
+       {{ currentPlayerName }}'s Turn :
         <img
           :src="currentPiece"
           class="ttt-icon-piece ml-[0.69rem]"
@@ -52,7 +52,7 @@
         v-else-if="ticTacToeStore.gameState.current_player !== null"
         class="ttt-subtext flex flex-row items-center ttt-turn"
       >
-        {{ myTurn ? "Your" : currentPlayerName }} Turn :
+        {{ myTurn ? "Your" : currentPlayerName + "'s" }} Turn :
         <img
           :src="currentPiece"
           class="ttt-icon-piece ml-[0.69rem]"

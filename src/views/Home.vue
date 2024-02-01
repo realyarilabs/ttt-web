@@ -9,8 +9,9 @@
       <input
         class="flex items-center self-stretch ttt-input rounded-md"
         v-model="ticTacToeStore.userName"
-        placeholder="Enter Your Name"
+        placeholder="Enter Your Name (optional)"
       />
+      <hr class="w-[150%] solid mb-4 mt-6"/>
         <button class="ttt-button btn-1 mt-5" @click="createGame(true)">
           CREATE NEW GAME
         </button>
@@ -70,6 +71,11 @@ const createGame = (createGameId?: boolean) => {
 </script>
 
 <style>
+
+hr.solid {
+  border-top: 3px solid var(--Light-Text-2);
+}
+
 .ttt-grid {
   background-image: repeating-linear-gradient(
       var(--lines) 0 1px,
