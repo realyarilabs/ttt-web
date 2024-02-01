@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { Channel, Socket } from "phoenix";
-import { onMounted, ref, watch } from "vue";
+import { onBeforeMount, ref, watch } from "vue";
 import { v4 as uuidv4 } from "uuid";
 import { GameState } from "../models/gameState.model";
+
+const serverUrl = "ws://localhost:4000/socket";
 
 export const useTicTacToeStore = defineStore(
   "useTicTacToeStore",
@@ -13,23 +15,21 @@ export const useTicTacToeStore = defineStore(
     const gameID = ref<string>();
     const gameState = ref<GameState>();
 
-    onMounted(() => {
+    onBeforeMount(() => {
       const savedBrowserID = localStorage.getItem("browser_id");
+
       if (savedBrowserID) {
         userID.value = savedBrowserID;
       } else {
         userID.value = uuidv4();
-        if (!userID.value) return;
         localStorage.setItem("browser_id", userID.value);
       }
-    });
 
-    watch(userID, () => {
-      if (!userID.value) return;
-      socket.value = new Socket("ws://localhost:4000/socket", {
+      socket.value = new Socket(serverUrl, {
         params: { user_id: userID.value },
       });
       socket.value.connect();
+
     });
 
     const createBattleChannel = (createGameId?: boolean) => {
@@ -48,6 +48,7 @@ export const useTicTacToeStore = defineStore(
       });
 
       battleChannel.value.join();
+      console.log('connected')
     };
 
     const leaveBattleChannel = () => {
