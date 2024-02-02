@@ -3,10 +3,13 @@
     <div class="flex flex-col justify-center items-center z-10">
       <h1 class="ttt-h1 pb-2">GAME OVER</h1>
       <img
+        v-if="!isSpectator"
         :src="showGraphics"
         alt="end graphics"
         class="my-8 md:mt-24 md:mb-20 ttt-rem"
       />
+      <span class="ttt-h1 pb-8" v-else-if="isTie"> It was a tie!</span>
+      <span class="ttt-h1 pb-8" v-else> {{ winnerName }} is VICTORIOUS!</span>
       <div class="flex flex-col md:flex-row gap-4 md:gap-[3.12rem]">
         <button
           v-if="!isSpectator"
@@ -48,7 +51,7 @@ const audioStore = useAudioStore();
 const ticTacToeStore = useTicTacToeStore();
 const router = useRouter();
 
-const { isSpectator } = useTicTacToeHelpers();
+const { isSpectator, getKeyByValue } = useTicTacToeHelpers();
 
 const gameEndings = ref({
   win: winSvg,
@@ -58,6 +61,7 @@ const gameEndings = ref({
 
 const winner = ticTacToeStore.gameState?.winner === ticTacToeStore.userID;
 const isTie = ticTacToeStore.gameState?.winner === "draw";
+const winnerName = isTie ? "" : getKeyByValue(ticTacToeStore.gameState?.players,ticTacToeStore.gameState?.winner!);
 
 const showGraphics = isTie
   ? gameEndings.value["tie"]
@@ -66,7 +70,7 @@ const showGraphics = isTie
   : gameEndings.value["loss"];
 
 const goHome = () => {
-  ticTacToeStore.endGame();
+  if( !isSpectator.value )ticTacToeStore.endGame();
   router.push({ name: 'homepage' });
 };
 
