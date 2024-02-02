@@ -91,7 +91,7 @@ onMounted(() => {
     router.push({ name: "game", params: { gameID } });
   });
 
-  if (winner) audioStore.playSound(soundWin);
+  if (winner || isSpectator) audioStore.playSound(soundWin);
   else audioStore.playSound(soundLose);
 });
 </script>
