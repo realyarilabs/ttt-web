@@ -4,7 +4,8 @@
       v-if="ticTacToeStore.gameState"
       class="flex flex-col justify-center items-center z-10"
     >
-      <h1 class="ttt-h1 pb-2">GAME ON !</h1>
+      <h1 v-if="isSpectator" class="ttt-h1 pb-2">YOU ARE SPECTATING!</h1>
+      <h1 v-else class="ttt-h1 pb-2">GAME ON !</h1>
       <div class="ttt-subtext flex flex-row justify-center items-center">
         Game Code
         <img :src="infoSvg" class="ttt-icon-piece mx-2" alt="info" /> :
@@ -98,7 +99,10 @@ import infoSvg from "../assets/info.svg";
 import volumeButton from "../components/volumeButton.vue";
 import { useClipboard } from "@vueuse/core";
 
+import { useTicTacToeHelpers } from "../composables/spectatorHelper";
+
 const ticTacToeStore = useTicTacToeStore();
+const { getKeyByValue, isSpectator } = useTicTacToeHelpers();
 
 const router = useRouter();
 const route = useRoute();
@@ -122,13 +126,6 @@ const gamePieces: {
   { id: "X", icon: xSvg, player_number: "player_1" },
 ];
 
-const isSpectator = computed(() => {
-  if (!ticTacToeStore.gameState) return;
-  return (
-    getKeyByValue(ticTacToeStore.gameState.players, ticTacToeStore.userID!) ===
-    undefined
-  );
-});
 
 const myTurn = computed(() => {
   return ticTacToeStore.gameState?.current_player === ticTacToeStore.userID;
@@ -159,9 +156,6 @@ const getPieceByValue = (value: string) => {
   return gamePieces.find((piece) => piece.id === value)?.icon;
 };
 
-const getKeyByValue = (object: any, value: string) => {
-  return Object.keys(object).find((key) => object[key] === value);
-};
 
 const leaveMatch = () => {
   ticTacToeStore.leaveMatch();
