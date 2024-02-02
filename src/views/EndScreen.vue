@@ -9,6 +9,7 @@
       />
       <div class="flex flex-col md:flex-row gap-4 md:gap-[3.12rem]">
         <button
+          v-if="!isSpectator"
           class="sm:w-40 ttt-button btn-2"
           @click="ticTacToeStore.playAgain()"
         >
@@ -41,10 +42,13 @@ import winSvg from "../assets/end/win.svg";
 import lossSvg from "../assets/end/loss.svg";
 import tieSvg from "../assets/end/tie.svg";
 import volumeButton from "../components/volumeButton.vue";
+import { useTicTacToeHelpers } from "../composables/spectatorHelper";
 
 const audioStore = useAudioStore();
 const ticTacToeStore = useTicTacToeStore();
 const router = useRouter();
+
+const { isSpectator } = useTicTacToeHelpers();
 
 const gameEndings = ref({
   win: winSvg,
