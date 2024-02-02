@@ -99,7 +99,7 @@ import infoSvg from "../assets/info.svg";
 import volumeButton from "../components/volumeButton.vue";
 import { useClipboard } from "@vueuse/core";
 
-import { useTicTacToeHelpers } from "../composables/spectatorHelper";
+import { useTicTacToeHelpers } from "../composables/tttHelper";
 
 const ticTacToeStore = useTicTacToeStore();
 const { getKeyByValue, isSpectator } = useTicTacToeHelpers();

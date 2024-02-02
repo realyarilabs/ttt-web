@@ -44,7 +44,7 @@ import winSvg from "../assets/end/win.svg";
 import lossSvg from "../assets/end/loss.svg";
 import tieSvg from "../assets/end/tie.svg";
 import volumeButton from "../components/volumeButton.vue";
-import { useTicTacToeHelpers } from "../composables/spectatorHelper";
+import { useTicTacToeHelpers } from "../composables/tttHelper";
 
 const audioStore = useAudioStore();
 const ticTacToeStore = useTicTacToeStore();
