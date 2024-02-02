@@ -70,12 +70,12 @@ const showGraphics = isTie
   : gameEndings.value["loss"];
 
 const goHome = () => {
-  if( !isSpectator.value )ticTacToeStore.endGame();
+  ticTacToeStore.endGame();
+  ticTacToeStore.leaveMatchChannel();
   router.push({ name: 'homepage' });
 };
 
 const playAgain = () => {
-  ticTacToeStore.endGame();
   ticTacToeStore.playAgain()
 };
 
@@ -84,9 +84,10 @@ onMounted(() => {
     router.push({ name: "homepage" });
     return;
   }
-  const gameID = ticTacToeStore.gameID;
 
   ticTacToeStore.matchChannel.on("play_again", () => {
+    const gameID = ticTacToeStore.gameID;
+    ticTacToeStore.endGame();
     router.push({ name: "game", params: { gameID } });
   });
 
