@@ -11,13 +11,13 @@
         <button
           v-if="!isSpectator"
           class="sm:w-40 ttt-button btn-2"
-          @click="ticTacToeStore.playAgain()"
+          @click="playAgain"
         >
           Play Again
         </button>
         <button
           class="sm:w-40 ttt-button btn-1"
-          @click="$router.push({ name: 'homepage' })"
+          @click="goHome"
         >
           Return Home
         </button>
@@ -65,14 +65,22 @@ const showGraphics = isTie
   ? gameEndings.value["win"]
   : gameEndings.value["loss"];
 
+const goHome = () => {
+  ticTacToeStore.endGame();
+  router.push({ name: 'homepage' });
+};
+
+const playAgain = () => {
+  ticTacToeStore.endGame();
+  ticTacToeStore.playAgain()
+};
+
 onMounted(() => {
   if (!ticTacToeStore.gameState || !ticTacToeStore.matchChannel) {
     router.push({ name: "homepage" });
     return;
   }
   const gameID = ticTacToeStore.gameID;
-
-  ticTacToeStore.endGame();
 
   ticTacToeStore.matchChannel.on("play_again", () => {
     router.push({ name: "game", params: { gameID } });
