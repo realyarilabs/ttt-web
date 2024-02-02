@@ -3,12 +3,11 @@
     <div class="flex flex-col justify-center items-center z-10">
       <h1 class="ttt-h1 pb-2">GAME OVER</h1>
       <img
-        v-if="!isSpectator"
+        v-if="!isSpectator || isTie"
         :src="showGraphics"
         alt="end graphics"
         class="my-8 md:mt-24 md:mb-20 ttt-rem"
       />
-      <span class="ttt-h1 pb-8" v-else-if="isTie"> It was a tie!</span>
       <span class="ttt-h1 pb-8" v-else> {{ winnerName }} is VICTORIOUS!</span>
       <div class="flex flex-col md:flex-row gap-4 md:gap-[3.12rem]">
         <button
