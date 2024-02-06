@@ -68,12 +68,14 @@
 
 	import volumeButton from "../components/volumeButton.vue"
 
-	const ticTacToeStore = useTicTacToeStore()
-	const { isSpectator, myTurn, pieceValue } = useTicTacToeHelpers()
-
 	const router = useRouter()
 	const route = useRoute()
 
+	const ticTacToeStore = useTicTacToeStore()
+	const { isSpectator, myTurn, pieceValue } = useTicTacToeHelpers()
+
+
+ // Copiar game code
 	const { copy, copied } = useClipboard({
 		source: ticTacToeStore.gameID!,
 		legacy: true,
@@ -84,6 +86,7 @@
 		legacy: true,
 	})
 
+ // informacao tabuleiro
 	const gamePieces: {
 		id: string
 		icon: string
@@ -110,6 +113,7 @@
 		return gamePieces.find((piece) => piece.id === value)?.icon
 	}
 
+ // metodos
 	const leaveMatch = () => {
 		ticTacToeStore.leaveMatch()
 		router.push({ name: "homepage" })
@@ -119,6 +123,7 @@
     ticTacToeStore.executeGameMove(x, y)
   };
 
+ // watchers
 	watch(
 		() => ticTacToeStore.gameState?.status,
 		() => {
@@ -127,6 +132,7 @@
 		{ immediate: true, deep: true }
 	)
 
+ // lifecycle hooks
 	onBeforeMount(() => {
 		if (!route.params.gameID && !ticTacToeStore.gameID) {
 			router.push({ name: "Home" })

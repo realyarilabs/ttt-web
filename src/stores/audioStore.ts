@@ -11,11 +11,7 @@ export const useAudioStore = defineStore("useAudioStore", () => {
 	const audio = new Audio()
 
 	const toggleVolume = (audioSwitch: boolean) => {
-		if (audioSwitch) {
-			audio.volume = 1
-		} else {
-			audio.volume = 0
-		}
+    audio.volume = audioSwitch ? 1 : 0
 	}
 
 	const playSoundPlay = (symbol: string) => {

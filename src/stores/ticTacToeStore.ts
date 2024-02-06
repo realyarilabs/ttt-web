@@ -12,6 +12,7 @@ import { useAudioStore } from "./audioStore"
 const serverUrl = import.meta.env.VITE_SERVER_URL ? import.meta.env.VITE_SERVER_URL : "ws://localhost:4000/socket"
 
 export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
+
 	const audioStore = useAudioStore()
 
 	const socket = ref<Socket>()
@@ -50,17 +51,17 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 
 		if (!gameID.value) return { error: "No Game ID" }
 
-		// Inicializacao do canal da match
+		// Inicializacao do canal match
 		matchChannel.value = socket.value.channel("games:match:" + gameID.value, {
 			name: userName.value,
 		})
 
-		// atualizacao do estado do jogo
+		// listener atualizacao do estado do jogo
 		matchChannel.value.on("game_state_sent", (payload) => {
 			gameState.value = payload
 		})
 
-		// sound cues
+		// listener sound cues
 		matchChannel.value.on("move_made", (payload: Move) => {
 			audioStore.playSoundPlay(payload.symbol)
 		})
