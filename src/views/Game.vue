@@ -116,7 +116,8 @@
 	}
 
 	const isGameFinished = computed(() => {
-		return ticTacToeStore.gameState?.status === "game_over"
+    // check the tictactoeStore status for "game_over"
+		return false
 	})
 
 	const winnerLine = computed(() => {
@@ -131,7 +132,8 @@
 	}
 
 	const executeMove = (x: number, y: number) => {
-		ticTacToeStore.executeGameMove(x, y)
+		console.log(x, y)
+		// call tictactoeStore executeGameMove action
 	}
 
 	// watchers
