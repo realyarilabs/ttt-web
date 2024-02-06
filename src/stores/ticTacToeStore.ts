@@ -64,6 +64,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 		// listener sound cues
 		matchChannel.value.on("move_made", (payload: Move) => {
       // call sound from sound store
+      // correct symbol for sound is in payload
 		})
 
 		// coneccao ao canal da match
@@ -89,7 +90,6 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 		if (!matchChannel.value) {
 			throw new Error("No Matchmaking channel")
 		}
-		console.log(x, y)
     //Push to matchChannel the command move for x,y
 	}
 

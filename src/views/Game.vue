@@ -116,16 +116,17 @@
 	}
 
 	const isGameFinished = computed(() => {
-    // check the tictactoeStore status for "game_over"
+    // check the tictactoeStore game status for "game_over"
 		return false
 	})
 
 	const winnerLine = computed(() => {
+    //calculate the winning line
 		if (!ticTacToeStore.gameState?.board || !isGameFinished.value) return []
 		else return []
 	})
 
-	// metodos
+	// methods
 	const leaveMatch = () => {
 		ticTacToeStore.leaveMatch()
 		router.push({ name: "homepage" })
@@ -133,7 +134,7 @@
 
 	const executeMove = (x: number, y: number) => {
 		console.log(x, y)
-		// call tictactoeStore executeGameMove action
+		// call tictactoeStore executeGameMove action from x,y
 	}
 
 	// watchers
