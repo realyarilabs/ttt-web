@@ -67,6 +67,7 @@ export function useTicTacToeHelpers() {
 
 	const getWinningLine = (board: string[][]) => {
 		 return winCombinations.find((line) => {
+      // REMOVE THIS TOO?
 			const first = board[line[0].x][ line[0].y]
 			const second = board[line[1].x][line[1].y]
 			const third = board[line[2].x][line[2].y]

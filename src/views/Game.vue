@@ -75,7 +75,7 @@
 	const route = useRoute()
 
 	const ticTacToeStore = useTicTacToeStore()
-	const { isSpectator, myTurn, pieceValue, getWinningLine } = useTicTacToeHelpers()
+	const { isSpectator, myTurn, pieceValue } = useTicTacToeHelpers()
 
 	// Copiar game code
 	const { copy, copied } = useClipboard({
@@ -122,7 +122,7 @@
 
 	const winnerLine = computed(() => {
 		if (!ticTacToeStore.gameState?.board || !isGameFinished.value) return []
-		else return getWinningLine(ticTacToeStore.gameState.board)
+		else return []
 	})
 
 	// metodos
