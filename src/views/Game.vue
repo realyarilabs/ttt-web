@@ -124,7 +124,7 @@
 		else return getWinningLine(ticTacToeStore.gameState.board)
 	})
 
-	// metodos
+	// methods
 	const leaveMatch = () => {
 		ticTacToeStore.leaveMatch()
 		router.push({ name: "homepage" })
