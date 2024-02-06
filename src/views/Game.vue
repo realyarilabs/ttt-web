@@ -21,8 +21,11 @@
 					<button
 						v-for="(value, j) of row"
 						:key="j"
-						class="w-20 h-20 ttt-square md:w-[8.125rem] md:h-[8.125rem] rounded-[0.625rem] flex justify-center items-center"
-						@click="executeMove(i,j)"
+						:class="{
+							'w-20 h-20 ttt-square md:w-[8.125rem] md:h-[8.125rem] rounded-[0.625rem] flex justify-center items-center': true,
+							winner: winnerLine?.find((element) => element.x === i && element.y === j),
+						}"
+						@click="executeMove(i, j)"
 					>
 						<img v-if="value" :src="getPieceByValue(value)" class="sm:h-8 sm:w-8 md:h-28 md:w-[3.75rem]" :alt="value" />
 					</button>
@@ -72,10 +75,9 @@
 	const route = useRoute()
 
 	const ticTacToeStore = useTicTacToeStore()
-	const { isSpectator, myTurn, pieceValue } = useTicTacToeHelpers()
+	const { isSpectator, myTurn, pieceValue, getWinningLine } = useTicTacToeHelpers()
 
-
- // Copiar game code
+	// Copiar game code
 	const { copy, copied } = useClipboard({
 		source: ticTacToeStore.gameID!,
 		legacy: true,
@@ -86,7 +88,7 @@
 		legacy: true,
 	})
 
- // informacao tabuleiro
+	// informacao tabuleiro
 	const gamePieces: {
 		id: string
 		icon: string
@@ -113,28 +115,40 @@
 		return gamePieces.find((piece) => piece.id === value)?.icon
 	}
 
- // metodos
+	const isGameFinished = computed(() => {
+		return ticTacToeStore.gameState?.status === "game_over"
+	})
+
+	const winnerLine = computed(() => {
+		if (!ticTacToeStore.gameState?.board || !isGameFinished.value) return []
+		else return getWinningLine(ticTacToeStore.gameState.board)
+	})
+
+	// metodos
 	const leaveMatch = () => {
 		ticTacToeStore.leaveMatch()
 		router.push({ name: "homepage" })
 	}
 
-  const executeMove = (x: number,y: number) => {
-    ticTacToeStore.executeGameMove(x, y)
-  };
+	const executeMove = (x: number, y: number) => {
+		ticTacToeStore.executeGameMove(x, y)
+	}
 
- // watchers
+	// watchers
 	watch(
 		() => ticTacToeStore.gameState?.status,
 		() => {
-			if (ticTacToeStore.gameState?.status === "game_over"){
-        router.push({ name: "end" })
-      }
+			if (isGameFinished.value) {
+				setTimeout(() => {
+					console.log("End Delayed for 3 seconds.")
+					router.push({ name: "end" })
+				}, 3000)
+			}
 		},
 		{ immediate: true, deep: true }
 	)
 
- // lifecycle hooks
+	// lifecycle hooks
 	onBeforeMount(() => {
 		if (!route.params.gameID && !ticTacToeStore.gameID) {
 			router.push({ name: "Home" })
@@ -150,6 +164,9 @@
 <style>
 	.ttt-square {
 		background: var(--Game-Board-BG);
+	}
+	.ttt-square.winner {
+		background: var(--Light-Text);
 	}
 
 	.ttt-icon-piece {
