@@ -74,6 +74,7 @@ export function useTicTacToeHelpers() {
 			if (first !== "" && first === second && second == third){
         return true
       }
+     //
 		})
 	}
 
