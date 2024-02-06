@@ -90,7 +90,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 			throw new Error("No Matchmaking channel")
 		}
 		console.log(x, y)
-    //Push to matchChannel the command move for x & y
+    //Push to matchChannel the command move for x,y
 	}
 
 	const playAgain = () => {
