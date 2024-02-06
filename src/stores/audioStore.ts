@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 
+import soundX from "../assets/audio/soundx.wav";
+import soundO from "../assets/audio/soundo.wav";
+
 export const useAudioStore = defineStore("useAudioStore", () => {
   const audio = new Audio();
 
@@ -11,9 +14,10 @@ export const useAudioStore = defineStore("useAudioStore", () => {
     }
   };
 
-  const playSound = (sound: string) => {
-    audio.src = sound;
+  const playSound = (symbol: string) => {
+    audio.src = symbol === 'X' ? soundX : soundO;
     audio.play();
   };
+
   return { audio, toggleVolume, playSound };
 });

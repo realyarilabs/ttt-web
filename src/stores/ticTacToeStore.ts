@@ -8,8 +8,6 @@ import { Move } from "../models/move.model";
 import { GameState } from "../models/gameState.model";
 
 import { useAudioStore } from "./audioStore";
-import soundX from "../assets/audio/soundx.wav";
-import soundO from "../assets/audio/soundo.wav";
 
 const serverUrl = import.meta.env.VITE_SERVER_URL
   ? import.meta.env.VITE_SERVER_URL
@@ -67,8 +65,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 
     // sound cues
     matchChannel.value.on("move_made", (payload: Move) => {
-      if (payload.symbol === "X") audioStore.playSound(soundX);
-      else audioStore.playSound(soundO);
+      audioStore.playSound(payload.symbol);
     });
 
     // coneccao ao canal da match
