@@ -63,7 +63,7 @@ export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 
 		// listener sound cues
 		matchChannel.value.on("move_made", (payload: Move) => {
-			audioStore.playSoundPlay(payload.symbol)
+      // call sound from sound store
 		})
 
 		// coneccao ao canal da match
