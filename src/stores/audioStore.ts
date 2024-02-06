@@ -7,6 +7,7 @@ import soundWin from "../assets/audio/soundWin.wav"
 import soundLose from "../assets/audio/soundLose.wav"
 
 export const useAudioStore = defineStore("useAudioStore", () => {
+
 	const audio = new Audio()
 
 	const toggleVolume = (audioSwitch: boolean) => {
