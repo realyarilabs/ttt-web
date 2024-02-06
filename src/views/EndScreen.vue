@@ -24,13 +24,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useTicTacToeStore } from "../stores/ticTacToeStore";
-import { useAudioStore } from "../stores/audioStore";
+
 import winSvg from "../assets/end/win.svg";
 import lossSvg from "../assets/end/loss.svg";
 import tieSvg from "../assets/end/tie.svg";
-import volumeButton from "../components/volumeButton.vue";
+
+import { useAudioStore } from "../stores/audioStore";
+import { useTicTacToeStore } from "../stores/ticTacToeStore";
 import { useTicTacToeHelpers } from "../composables/tttHelper";
+
+import volumeButton from "../components/volumeButton.vue";
 
 const audioStore = useAudioStore();
 const ticTacToeStore = useTicTacToeStore();
