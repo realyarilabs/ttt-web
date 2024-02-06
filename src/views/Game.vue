@@ -127,7 +127,9 @@
 	watch(
 		() => ticTacToeStore.gameState?.status,
 		() => {
-			if (ticTacToeStore.gameState?.status === "game_over") router.push({ name: "end" })
+			if (ticTacToeStore.gameState?.status === "game_over"){
+        router.push({ name: "end" })
+      }
 		},
 		{ immediate: true, deep: true }
 	)
