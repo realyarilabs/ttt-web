@@ -2,25 +2,13 @@
   <div class="h-screen w-screen flex items-center justify-center bg-ttt">
     <div class="flex flex-col justify-center items-center z-10">
       <h1 class="ttt-h1 pb-2">GAME OVER</h1>
-      <img
-        v-if="!isSpectator || isTie"
-        :src="showGraphics"
-        alt="end graphics"
-        class="my-8 md:mt-24 md:mb-20 ttt-rem"
-      />
+      <img v-if="!isSpectator || isTie" :src="showGraphics" alt="end graphics" class="my-8 md:mt-24 md:mb-20 ttt-rem" />
       <span class="ttt-h1 pb-8" v-else> {{ winnerName }} is VICTORIOUS!</span>
       <div class="flex flex-col md:flex-row gap-4 md:gap-[3.12rem]">
-        <button
-          v-if="!isSpectator"
-          class="sm:w-40 ttt-button btn-2"
-          @click="playAgain"
-        >
+        <button v-if="!isSpectator" class="sm:w-40 ttt-button btn-2" @click="playAgain">
           Play Again
         </button>
-        <button
-          class="sm:w-40 ttt-button btn-1"
-          @click="goHome"
-        >
+        <button class="sm:w-40 ttt-button btn-1" @click="goHome">
           Return Home
         </button>
       </div>
@@ -38,8 +26,6 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useTicTacToeStore } from "../stores/ticTacToeStore";
 import { useAudioStore } from "../stores/audioStore";
-import soundWin from "../assets/audio/soundWin.wav";
-import soundLose from "../assets/audio/soundLose.wav";
 import winSvg from "../assets/end/win.svg";
 import lossSvg from "../assets/end/loss.svg";
 import tieSvg from "../assets/end/tie.svg";
@@ -60,13 +46,13 @@ const gameEndings = ref({
 
 const winner = ticTacToeStore.gameState?.winner === ticTacToeStore.userID;
 const isTie = ticTacToeStore.gameState?.winner === "draw";
-const winnerName = isTie ? "" : getKeyByValue(ticTacToeStore.gameState?.players,ticTacToeStore.gameState?.winner!);
+const winnerName = isTie ? "" : getKeyByValue(ticTacToeStore.gameState?.players, ticTacToeStore.gameState?.winner!);
 
 const showGraphics = isTie
   ? gameEndings.value["tie"]
   : winner
-  ? gameEndings.value["win"]
-  : gameEndings.value["loss"];
+    ? gameEndings.value["win"]
+    : gameEndings.value["loss"];
 
 const goHome = () => {
   ticTacToeStore.endGame();
@@ -75,7 +61,7 @@ const goHome = () => {
 };
 
 const playAgain = () => {
-  ticTacToeStore.playAgain()
+  ticTacToeStore.playAgain();
 };
 
 onMounted(() => {
@@ -90,8 +76,7 @@ onMounted(() => {
     router.push({ name: "game", params: { gameID } });
   });
 
-  if (winner || isSpectator) audioStore.playSound(soundWin);
-  else audioStore.playSound(soundLose);
+  audioStore.playSoundFinish(winner || isSpectator ? "win" : "loss");
 });
 </script>
 
