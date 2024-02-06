@@ -1,9 +1,10 @@
 import { computed } from "vue"
 import { useTicTacToeStore } from "../stores/ticTacToeStore"
 
-const ticTacToeStore = useTicTacToeStore()
 
 export function useTicTacToeHelpers() {
+
+  const ticTacToeStore = useTicTacToeStore()
 
 	const getKeyByValue = (object: any, value: string) => {
 		return Object.keys(object).find((key) => object[key] === value)
