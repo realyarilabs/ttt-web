@@ -47,7 +47,7 @@
 		//return the match channel from ticTacToeStore
 	})
 
-  // Tip: To access ref and computed properties tou must use var_name.value
+	// Tip: To access ref and computed properties tou must use var_name.value
 
 	const sendMessage = (message: string) => {
 		// #2
