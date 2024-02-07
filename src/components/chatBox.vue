@@ -26,13 +26,14 @@
 
 	import { useTicTacToeHelpers } from "../composables/tttHelper"
 	const { checkIsSpectator } = useTicTacToeHelpers()
-	const ticTacToeStore = useTicTacToeStore()
 
 	interface ChatMessage {
 		message: string
 		sender_id: string
 	}
 	const chatHistoryAdvanced = ref(Array<ChatMessage>())
+
+	const ticTacToeStore = useTicTacToeStore()
 
 	const chatHistory = ref([""])
 	const currentMessage = ref("")
