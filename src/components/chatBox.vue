@@ -4,9 +4,8 @@
 			id="chat"
 			class="flex flex-col w-full bg-[#2d8078] rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-rounded"
 		>
-			<div v-for="(message, index) in chatHistoryAdvanced" :key="index" class="px-2">
-				<span v-if="checkIsSpectator(message.sender_id)" class="text-black">{{ message.message }}</span>
-				<span v-else class="text-white">{{ message.message }}</span>
+			<div v-for="(message, index) in chatHistory" :key="index" class="px-2">
+				<span class="text-white">{{ message }}</span>
 			</div>
 		</div>
 		<div class="flex flex-col h-[25%]">
@@ -24,36 +23,41 @@
 	import { ref, onMounted, computed } from "vue"
 	import { useTicTacToeStore } from "../stores/ticTacToeStore"
 
-	import { useTicTacToeHelpers } from "../composables/tttHelper"
-	const { checkIsSpectator } = useTicTacToeHelpers()
+	// #4
+	// For advanced exercise uncomment these lines
+	// save the whole payload into chatHistoryAdvanced and use checkIsSpectator in template to distinguish between players/spectators
+	/*
+ import { useTicTacToeHelpers } from "../composables/tttHelper"
+ const { checkIsSpectator } = useTicTacToeHelpers()
 
-	interface ChatMessage {
-		message: string
-		sender_id: string
-	}
-	const chatHistoryAdvanced = ref(Array<ChatMessage>())
+ interface ChatMessage {
+   message: string
+   sender_id: string
+ }
+ const chatHistoryAdvanced = ref(Array<ChatMessage>())
+ */
 
 	const ticTacToeStore = useTicTacToeStore()
 
 	const chatHistory = ref([""])
 	const currentMessage = ref("")
 
-
 	const matchChannel = computed(() => {
-		return ticTacToeStore.matchChannel!
+		// #1
+		//return the match channel from ticTacToeStore
 	})
 
+  // Tip: To access ref and computed properties tou must use var_name.value
+
 	const sendMessage = (message: string) => {
-		matchChannel.value.push("broadcast_message", { message })
-		currentMessage.value = ""
+		// #2
+		//push to the match channel the "broadcast_message" event with the message as payload and clear currentMessage value
 	}
 
 	onMounted(() => {
-		matchChannel.value.on("game_message", (payload: { message: string; sender_id: string }) => {
-			chatHistory.value.push(payload.message)
-			chatHistoryAdvanced.value.push(payload)
-			autoScroll()
-		})
+		// #3
+		//listen to the "game_message" event from match channel with the message as payload: { message: string; sender_id: string } and push the message to chat history
+		//optional: you can also use autoScroll function to scroll to most recent message
 	})
 
 	const autoScroll = () => {
