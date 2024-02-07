@@ -11,7 +11,7 @@
 				<span v-else class="text-white">{{ clipID(message.sender_id) }} : {{ message.message }}</span>
 			</div>
 		</div>
-		<div class="flex flex-col h-[25%]">
+		<div class="flex flex-col h-[25%] items-center">
 			<input
 				class="flex items-center self-stretch ttt-input-2 rounded-none p-2"
 				v-model="currentMessage"
