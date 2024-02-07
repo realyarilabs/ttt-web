@@ -113,7 +113,7 @@
         </p>
     </div>
     </div>
-    <div class="flex h-full w-full absolute px-14 py-5">
+    <div class="flex h-full w-full absolute top-0 px-14 py-5">
       <div class="relative flex h-full w-full">
         <button @click="leaveMatch">
           <img
