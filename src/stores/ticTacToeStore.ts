@@ -9,7 +9,7 @@ import { GameState } from "../models/gameState.model"
 
 import { useAudioStore } from "./audioStore"
 
-const serverUrl = import.meta.env.VITE_SERVER_URL ? import.meta.env.VITE_SERVER_URL : "ws://localhost:4000/socket" //"wss://ttt-srv.yarilabs.com/socket" 
+const serverUrl = import.meta.env.VITE_SERVER_URL ? import.meta.env.VITE_SERVER_URL : "wss://ttt-srv.yarilabs.com/socket"  //"ws://localhost:4000/socket"
 
 export const useTicTacToeStore = defineStore("useTicTacToeStore", () => {
 
