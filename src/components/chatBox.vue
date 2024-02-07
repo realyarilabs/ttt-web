@@ -128,7 +128,7 @@
 	.ttt-input-2 {
 		gap: 0.625rem;
 		border: 1px solid var(--bg-color);
-		background: white;
+		background: var(--Light-Text-2);
 		/* Text */
 		color: var(--bg-color);
 		font-family: Gilroy-Light;
