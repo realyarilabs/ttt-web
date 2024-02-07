@@ -36,9 +36,9 @@
 		cursor: pointer;
 		text-transform: uppercase;
 	}
-  .ttt-button.rounded-none{
-    border-radius: 0px;
-  }
+	.ttt-button.rounded-none {
+		border-radius: 0px;
+	}
 
 	.btn-1 {
 		background: var(--CTA);
@@ -46,6 +46,9 @@
 	}
 	.btn-2 {
 		background: var(--CTA-2);
+		color: var(--Light-Text);
+	}
+	.btn-3 {
 		color: var(--Light-Text);
 	}
 
