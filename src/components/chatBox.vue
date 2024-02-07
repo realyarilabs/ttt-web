@@ -80,6 +80,16 @@ const chatHistoryAdvanced = ref(Array<ChatMessage>())
 		}, 250)
 	}
 
+  // EXTRA
+	// Challenge SEI 4
+  // iIn the template , inside the message's span add the sender_id before the message
+  // so it becomes ID: message
+  // Use this method to clip the id since it is too long
+  // useful links: https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation
+	const clipID = (userID: string) => {
+    return userID.slice(0,6)
+	}
+
 	// HELP TIPS
 	// 1
 	// channel.push("event_topic", { variables })
