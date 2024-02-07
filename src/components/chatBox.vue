@@ -23,7 +23,6 @@
 
 	const sendMessage = (message: string) => {
 		ticTacToeStore.matchChannel?.push("broadcast_message", { message })
-			chatHistory.value.push(message)
 	}
 
 	onMounted(() => {
