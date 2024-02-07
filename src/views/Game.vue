@@ -1,5 +1,7 @@
 <template>
-	<div class="h-screen w-screen flex items-center justify-center bg-ttt">
+	<div
+		class="size-full min-h-screen min-w-screen flex items-center justify-center bg-ttt"
+	>
 		<div
 			v-if="ticTacToeStore.gameState"
 			class="flex flex-col justify-center items-center z-10"
@@ -25,9 +27,9 @@
 					<img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy" />
 				</button>
 			</div>
-			<div class="grid grid-cols-3">
+			<div class="grid grid-cols-1 xl:grid-cols-3">
 				<div
-					class="col-start-2 flex flex-col justify-center items-center pt-[3.69rem]"
+					class="xl:col-start-2 flex flex-col justify-center items-center pt-[3.69rem]"
 				>
 					<div
 						v-for="(row, i) of ticTacToeStore.gameState.board"
@@ -54,35 +56,64 @@
 						</button>
 					</div>
 				</div>
-				<div class="flex pt-[3.69rem] px-14 mb-[0.94rem]">
+				<div class="xl:hidden visible flex justify-center">
+					<p
+						v-if="isSpectator"
+						class="ttt-subtext flex flex-row items-center ttt-turn"
+					>
+						{{ currentPlayerName }}'s Turn :
+						<img
+							:src="currentPiece"
+							class="ttt-icon-piece ml-[0.69rem]"
+							:alt="pieceValue"
+						/>
+					</p>
+					<p
+						v-else-if="ticTacToeStore.gameState.current_player !== null"
+						class="ttt-subtext flex flex-row items-center ttt-turn"
+					>
+						{{ myTurn ? "Your" : currentPlayerName + "'s" }} Turn :
+						<img
+							:src="currentPiece"
+							class="ttt-icon-piece ml-[0.69rem]"
+							:alt="pieceValue"
+						/>
+					</p>
+					<p v-else class="ttt-subtext flex flex-row items-center ttt-turn">
+						Waiting for opponent
+					</p>
+				</div>
+				<div class="max-xl:min-h-[500px] flex pt-[3.69rem] px-14 mb-[0.94rem]">
 					<chatBox />
 				</div>
 			</div>
-			<p
-				v-if="isSpectator"
-				class="ttt-subtext flex flex-row items-center ttt-turn"
-			>
-				{{ currentPlayerName }}'s Turn :
-				<img
-					:src="currentPiece"
-					class="ttt-icon-piece ml-[0.69rem]"
-					:alt="pieceValue"
-				/>
-			</p>
-			<p
-				v-else-if="ticTacToeStore.gameState.current_player !== null"
-				class="ttt-subtext flex flex-row items-center ttt-turn"
-			>
-				{{ myTurn ? "Your" : currentPlayerName + "'s" }} Turn :
-				<img
-					:src="currentPiece"
-					class="ttt-icon-piece ml-[0.69rem]"
-					:alt="pieceValue"
-				/>
-			</p>
-			<p v-else class="ttt-subtext flex flex-row items-center ttt-turn">
-				Waiting for opponent
-			</p>
+			<div class="hidden xl:visible">
+				<p
+					v-if="isSpectator"
+					class="ttt-subtext flex flex-row items-center ttt-turn"
+				>
+					{{ currentPlayerName }}'s Turn :
+					<img
+						:src="currentPiece"
+						class="ttt-icon-piece ml-[0.69rem]"
+						:alt="pieceValue"
+					/>
+				</p>
+				<p
+					v-else-if="ticTacToeStore.gameState.current_player !== null"
+					class="ttt-subtext flex flex-row items-center ttt-turn"
+				>
+					{{ myTurn ? "Your" : currentPlayerName + "'s" }} Turn :
+					<img
+						:src="currentPiece"
+						class="ttt-icon-piece ml-[0.69rem]"
+						:alt="pieceValue"
+					/>
+				</p>
+				<p v-else class="ttt-subtext flex flex-row items-center ttt-turn">
+					Waiting for opponent
+				</p>
+			</div>
 		</div>
 		<div class="flex h-full w-full absolute px-14 py-5">
 			<div class="relative flex h-full w-full">
