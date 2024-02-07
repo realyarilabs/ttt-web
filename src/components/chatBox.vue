@@ -86,10 +86,10 @@ const chatHistoryAdvanced = ref(Array<ChatMessage>())
 	//
 	// 2
 	/*
-  channel.on("event_topic", (payload: { variable1: string; variable2: string }) => {
-    ...do stuff
-  })
-*/
+    channel.on("event_topic", (payload: { variable1: string; variable2: string }) => {
+      ...do stuff
+    })
+  */
 </script>
 
 <style>
