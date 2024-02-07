@@ -36,6 +36,9 @@
 		cursor: pointer;
 		text-transform: uppercase;
 	}
+  .ttt-button.rounded-none{
+    border-radius: 0px;
+  }
 
 	.btn-1 {
 		background: var(--CTA);

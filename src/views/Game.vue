@@ -16,7 +16,8 @@
 					<img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy" />
 				</button>
 			</div>
-			<div class="flex flex-col justify-center items-center pt-[3.69rem]">
+      <div class="grid grid-cols-3">
+			<div class="col-start-2 flex flex-col justify-center items-center pt-[3.69rem]">
 				<div v-for="(row, i) of ticTacToeStore.gameState.board" :key="i" class="flex gap-[0.94rem] pb-[0.94rem]">
 					<button
 						v-for="(value, j) of row"
@@ -30,6 +31,10 @@
 						<img v-if="value" :src="getPieceByValue(value)" class="sm:h-8 sm:w-8 md:h-28 md:w-[3.75rem]" :alt="value" />
 					</button>
 				</div>
+      </div>
+      <div class="flex pt-[3.69rem] px-14 mb-[0.94rem]">
+        <chatBox />
+      </div>
 			</div>
 			<p v-if="isSpectator" class="ttt-subtext flex flex-row items-center ttt-turn">
 				{{ currentPlayerName }}'s Turn :
@@ -70,6 +75,7 @@
 	import { useTicTacToeHelpers } from "../composables/tttHelper"
 
 	import volumeButton from "../components/volumeButton.vue"
+	import chatBox from "../components/chatBox.vue"
 
 	const router = useRouter()
 	const route = useRoute()

@@ -65,6 +65,11 @@ export function useTicTacToeHelpers() {
 		return Object.keys(object).find((key) => object[key] === value)
 	}
 
+  const checkIsSpectator = (userID: string) => {
+		if (!ticTacToeStore.gameState) return
+		return getKeyByValue(ticTacToeStore.gameState.players, userID) === undefined
+  };
+
 	const getWinningLine = (board: string[][]) => {
 		 return winCombinations.find((line) => {
 			const first = board[line[0].x][ line[0].y]
@@ -76,5 +81,5 @@ export function useTicTacToeHelpers() {
 		})
 	}
 
-	return { getKeyByValue, isSpectator, myTurn, pieceValue, getWinningLine }
+	return { getKeyByValue, isSpectator, myTurn, pieceValue, getWinningLine, checkIsSpectator }
 }
