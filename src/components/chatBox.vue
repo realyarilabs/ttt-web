@@ -9,18 +9,22 @@
 			</div>
 		</div>
 		<div class="flex flex-col h-[25%]">
-			<input class="flex items-center self-stretch ttt-input-2 rounded-none p-2" v-model="currentMessage" @keypress.enter="sendMessage(currentMessage)" />
+			<input
+				class="flex items-center self-stretch ttt-input-2 rounded-none p-2"
+				v-model="currentMessage"
+				@keypress.enter="sendMessage(currentMessage)"
+			/>
 			<button class="ttt-button btn-2 rounded-none" @click="sendMessage(currentMessage)">SEND</button>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { ref, onMounted,computed } from "vue"
+	import { ref, onMounted, computed } from "vue"
 	import { useTicTacToeStore } from "../stores/ticTacToeStore"
-  // #4
-  // For advanced exercise uncomment these lines
-  // save the whole payload into chatHistoryAdvanced and use checkIsSpectator in template to distinguish between players/spectators
+	// #4
+	// For advanced exercise uncomment these lines
+	// save the whole payload into chatHistoryAdvanced and use checkIsSpectator in template to distinguish between players/spectators
 	//import { useTicTacToeHelpers } from "../composables/tttHelper";
 	//const { checkIsSpectator } = useTicTacToeHelpers()
 	//interface ChatMessage { message: string; sender_id: string;}
@@ -31,23 +35,22 @@
 	const chatHistory = ref([""])
 	const currentMessage = ref("")
 
+	const matchChannel = computed(() => {
+		// #1
+		//return the match channel from ticTacToeStore
+	})
 
-  const matchChannel = computed(() => {
-     // #1
-    //return the match channel from ticTacToeStore
-  })
-
-  // To access ref and computed properties tou must use var_name.value
+	// Tip: To access ref and computed properties tou must use var_name.value
 
 	const sendMessage = (message: string) => {
-     // #2
-    //push to the match channel the "broadcast_message" event with the message as payload
+		// #2
+		//push to the match channel the "broadcast_message" event with the message as payload and clear currentMessage value
 	}
 
 	onMounted(() => {
-     // #3
-    //listen to the "game_message" event from match channel with the message as payload: { message: string; sender_id: string } and push the message to chat history
-    //optional: you can also use autoScroll function to scroll to most recent message
+		// #3
+		//listen to the "game_message" event from match channel with the message as payload: { message: string; sender_id: string } and push the message to chat history
+		//optional: you can also use autoScroll function to scroll to most recent message
 	})
 
 	const autoScroll = () => {
