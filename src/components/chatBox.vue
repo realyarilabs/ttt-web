@@ -42,10 +42,9 @@
 	const chatHistory = ref([""])
 	const currentMessage = ref("")
 
-	const matchChannel = ref(() => {
 		// #1
 		//return the match channel from ticTacToeStore
-	})
+	const matchChannel = ref()
 
 	// Tip: To access ref and computed properties tou must use var_name.value
 
