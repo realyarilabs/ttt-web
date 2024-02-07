@@ -61,10 +61,10 @@
 <style>
 	.ttt-input-2 {
 		gap: 0.625rem;
-		border: 1px solid var(--Light-Text-2);
-		background: var(--bg-color);
+		border: 1px solid var(--bg-color);
+		background: white;
 		/* Text */
-		color: var(--Light-Text-2);
+		color: var(--bg-color);
 		font-family: Gilroy-Light;
 		font-size: 1.5rem;
 		font-style: normal;
