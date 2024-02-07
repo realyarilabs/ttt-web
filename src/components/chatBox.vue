@@ -42,7 +42,7 @@
 	const chatHistory = ref([""])
 	const currentMessage = ref("")
 
-	const matchChannel = computed(() => {
+	const matchChannel = ref(() => {
 		// #1
 		//return the match channel from ticTacToeStore
 	})
