@@ -5,7 +5,7 @@
 			class="flex flex-col w-full bg-[#2d8078] rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-rounded"
 		>
 			<div v-for="(message, index) in chatHistory" :key="index" class="px-2">
-				<span class="text-white">{{ message }}</span>
+				<span id="message" class="text-white">{{ message }}</span>
 			</div>
 		</div>
 		<div class="flex flex-col h-[25%]">
@@ -20,12 +20,18 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, onMounted, computed } from "vue"
+	import { ref, onMounted } from "vue"
 	import { useTicTacToeStore } from "../stores/ticTacToeStore"
 
 	// Challenge SEI 3
-	// For advanced exercise uncomment these lines
-	// save the whole payload into chatHistoryAdvanced and use checkIsSpectator in template to distinguish between players/spectators
+ // Update the "game_message" listener function to save the whole payload into the chatHistoryAdvanced variable instead of chatHistory
+ // Inside the component's template :
+ //     update v-for to use chatHistoryAdvanced instead of chatHistory
+ //     update the message span by using v-if to check the message sender_id using the helper method checkIsSpectator
+ //       if sender_id is from a spectator changed the message class from 'text-white' to 'text-black'
+ // useful links: https://vuejs.org/guide/essentials/conditional.html#v-else
+
+// For exercise 3 uncomment the lines below
 	/*
  import { useTicTacToeHelpers } from "../composables/tttHelper"
  const { checkIsSpectator } = useTicTacToeHelpers()
@@ -48,13 +54,18 @@
 
 	const sendMessage = (message: string) => {
 		// Challenge SEI 1
-		//push to the match channel the "broadcast_message" event with the message as payload and clear currentMessage value
+    // Use the matchChannel to broadcast an event with the topic "broadcast_message" as the first parameter
+    // on the second parameter send an object containing the message received as argument to this function
+    // after pushing the event clear the currentMessage value by setting it as an empty string
 	}
 
 	onMounted(() => {
 		// Challenge SEI 2
-		//listen to the "game_message" event from match channel with the message as payload: { message: string; sender_id: string } and push the message to chat history
-		//optional: you can also use autoScroll function to scroll to most recent message
+    // Use the matchChannel to listen an event with the topic "game_message"
+    // you will receive a payload with the current format
+		// payload: { message: string; sender_id: string }
+    // the listener function will take the message from the payload and push it to the chatHistory variable
+		// optional: you can also call autoScroll function at the end to force chat window scroll to most recent message
 	})
 
 	const autoScroll = () => {
