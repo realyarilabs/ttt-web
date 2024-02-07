@@ -33,15 +33,15 @@
 
 	// For exercise 3 uncomment the lines below
 	/*
- import { useTicTacToeHelpers } from "../composables/tttHelper"
- const { checkIsSpectator } = useTicTacToeHelpers()
+import { useTicTacToeHelpers } from "../composables/tttHelper"
+const { checkIsSpectator } = useTicTacToeHelpers()
 
- interface ChatMessage {
-   message: string
-   sender_id: string
- }
- const chatHistoryAdvanced = ref(Array<ChatMessage>())
- */
+interface ChatMessage {
+ message: string
+ sender_id: string
+}
+const chatHistoryAdvanced = ref(Array<ChatMessage>())
+*/
 
 	const ticTacToeStore = useTicTacToeStore()
 
@@ -57,8 +57,8 @@
 		// after pushing the event clear the currentMessage value by setting it as an empty string
 		// Tip: To access ref and computed properties you must use var_name.value
 		/*
-      help tip: channel.push("event_topic", { variables })
-    */
+    if extra help is needed check help tips below
+  */
 	}
 
 	onMounted(() => {
@@ -69,10 +69,8 @@
 		// the listener function will take the message from the payload and push it to the chatHistory variable
 		// optional: you can also call autoScroll function at the end to force chat window scroll to most recent message
 		/*
-      help tip: channel.on("event_topic", (payload: { variable1: string; variable2: string }) => {
-        ...do stuff
-      })
-    */
+    if extra help is needed check help tips below
+  */
 	})
 
 	const autoScroll = () => {
@@ -81,6 +79,17 @@
 			if (objDiv) objDiv.scrollIntoView()
 		}, 250)
 	}
+
+	// HELP TIPS
+	// 1
+	// channel.push("event_topic", { variables })
+	//
+	// 2
+	/*
+  channel.on("event_topic", (payload: { variable1: string; variable2: string }) => {
+    ...do stuff
+  })
+*/
 </script>
 
 <style>
