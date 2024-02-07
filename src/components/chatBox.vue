@@ -2,26 +2,31 @@
 	<div class="flex flex-col size-full w-full overflow-hidden grow-0">
 		<div
 			id="chat"
-			class="flex flex-col w-full bg-[#2d8078] rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-rounded"
+			class="flex flex-col w-full bg-chat-green rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-rounded"
 		>
 			<div v-for="(message, index) in chatHistory" :key="index" class="px-2">
 				<span id="message" class="text-white">{{ message }}</span>
 			</div>
 		</div>
-		<div class="flex flex-col h-[25%]">
+		<div class="flex flex-col h-[25%] items-center">
 			<input
 				class="flex items-center self-stretch ttt-input-2 rounded-none p-2"
 				v-model="currentMessage"
 				@keypress.enter="sendMessage(currentMessage)"
 			/>
-			<button class="ttt-button btn-2 rounded-none" @click="sendMessage(currentMessage)">SEND</button>
+			<button
+				class="ttt-button btn-2 rounded-none"
+				@click="sendMessage(currentMessage)"
+			>
+				SEND
+			</button>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-	import { ref, onMounted } from "vue"
-	import { useTicTacToeStore } from "../stores/ticTacToeStore"
+	import { ref, onMounted } from "vue";
+	import { useTicTacToeStore } from "../stores/ticTacToeStore";
 
 	// Challenge SEI 3
 	// Update the "game_message" listener function to save the whole payload into the chatHistoryAdvanced variable instead of just the message to chatHistory
@@ -43,12 +48,12 @@ interface ChatMessage {
 const chatHistoryAdvanced = ref(Array<ChatMessage>())
 */
 
-	const ticTacToeStore = useTicTacToeStore()
+	const ticTacToeStore = useTicTacToeStore();
 
-	const chatHistory = ref([""])
-	const currentMessage = ref("")
+	const chatHistory = ref([""]);
+	const currentMessage = ref("");
 
-	const matchChannel = ticTacToeStore.matchChannel!
+	const matchChannel = ticTacToeStore.matchChannel!;
 
 	const sendMessage = (message: string) => {
 		// Challenge SEI 1
@@ -59,7 +64,7 @@ const chatHistoryAdvanced = ref(Array<ChatMessage>())
 		/*
     if extra help is needed check help tips below
   */
-	}
+	};
 
 	onMounted(() => {
 		// Challenge SEI 2
@@ -71,24 +76,24 @@ const chatHistoryAdvanced = ref(Array<ChatMessage>())
 		/*
     if extra help is needed check help tips below
   */
-	})
+	});
 
 	const autoScroll = () => {
 		setTimeout(() => {
-			var objDiv = document.querySelector("#chat > div:last-of-type")
-			if (objDiv) objDiv.scrollIntoView()
-		}, 250)
-	}
+			var objDiv = document.querySelector("#chat > div:last-of-type");
+			if (objDiv) objDiv.scrollIntoView();
+		}, 250);
+	};
 
-  // EXTRA
+	// EXTRA
 	// Challenge SEI 4
-  // In the template , inside the message's span add the sender_id alongside the message
-  // so it becomes USERID: message
-  // Use this method to clip the id since it is too long
-  // useful links: https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation
+	// In the template , inside the message's span add the sender_id alongside the message
+	// so it becomes USERID: message
+	// Use this method to clip the id since it is too long
+	// useful links: https://vuejs.org/guide/essentials/template-syntax.html#text-interpolation
 	const clipID = (userID: string) => {
-    return userID.slice(0,6)
-	}
+		return userID.slice(0, 6);
+	};
 
 	// HELP TIPS
 	// 1

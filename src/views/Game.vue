@@ -87,7 +87,7 @@
 					<chatBox />
 				</div>
 			</div>
-			<div class="hidden xl:visible">
+			<div class="hidden xl:visible xl:block">
 				<p
 					v-if="isSpectator"
 					class="ttt-subtext flex flex-row items-center ttt-turn"
@@ -115,7 +115,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="flex h-full w-full absolute px-14 py-5">
+		<div class="flex h-full w-full absolute top-0 px-14 py-5">
 			<div class="relative flex h-full w-full">
 				<button @click="leaveMatch">
 					<img
