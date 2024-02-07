@@ -24,14 +24,14 @@
 	import { useTicTacToeStore } from "../stores/ticTacToeStore"
 
 	// Challenge SEI 3
- // Update the "game_message" listener function to save the whole payload into the chatHistoryAdvanced variable instead of just the message to chatHistory
- // Inside the component's template :
- //     update v-for to use chatHistoryAdvanced instead of chatHistory
- //     update the message span by using v-if to check the message sender_id using the helper method checkIsSpectator
- //       if sender_id is from a spectator changed the message class from 'text-white' to 'text-black'
- // useful links: https://vuejs.org/guide/essentials/conditional.html#v-else
+	// Update the "game_message" listener function to save the whole payload into the chatHistoryAdvanced variable instead of just the message to chatHistory
+	// Inside the component's template :
+	//     update v-for to use chatHistoryAdvanced instead of chatHistory
+	//     update the message span by using v-if to check the message sender_id using the helper method checkIsSpectator
+	//       if sender_id is from a spectator changed the message class from 'text-white' to 'text-black'
+	// useful links: https://vuejs.org/guide/essentials/conditional.html#v-else
 
-// For exercise 3 uncomment the lines below
+	// For exercise 3 uncomment the lines below
 	/*
  import { useTicTacToeHelpers } from "../composables/tttHelper"
  const { checkIsSpectator } = useTicTacToeHelpers()
@@ -50,21 +50,20 @@
 
 	const matchChannel = ticTacToeStore.matchChannel!
 
-	// Tip: To access ref and computed properties tou must use var_name.value
-
 	const sendMessage = (message: string) => {
 		// Challenge SEI 1
-    // Use the matchChannel to broadcast an event with the topic "broadcast_message" as the first parameter
-    // on the second parameter send an object containing the message received as argument to this function
-    // after pushing the event clear the currentMessage value by setting it as an empty string
+		// Use the matchChannel to broadcast an event with the topic "broadcast_message" as the first parameter
+		// on the second parameter send an object containing the message received as argument to this function
+		// after pushing the event clear the currentMessage value by setting it as an empty string
+		// Tip: To access ref and computed properties tou must use var_name.value
 	}
 
 	onMounted(() => {
 		// Challenge SEI 2
-    // Use the matchChannel to listen an event with the topic "game_message"
-    // you will receive a payload with the current format
+		// Use the matchChannel to listen an event with the topic "game_message"
+		// you will receive a payload with the current format
 		// payload: { message: string; sender_id: string }
-    // the listener function will take the message from the payload and push it to the chatHistory variable
+		// the listener function will take the message from the payload and push it to the chatHistory variable
 		// optional: you can also call autoScroll function at the end to force chat window scroll to most recent message
 	})
 
