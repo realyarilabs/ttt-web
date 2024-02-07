@@ -2,7 +2,7 @@
 	<div class="flex flex-col size-full w-full overflow-hidden grow-0">
 		<div
 			id="chat"
-			class="flex flex-col w-full bg-[#2d8078] rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-rounded"
+			class="flex flex-col w-full bg-chat-green rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-rounded"
 		>
 			<div v-for="(message, index) in chatHistoryAdvanced" :key="index" class="px-2">
 				<span v-if="checkIsSpectator(message.sender_id)" class="text-black"
