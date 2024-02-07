@@ -4,7 +4,7 @@
 	>
 		<div
 			v-if="ticTacToeStore.gameState"
-			class="flex flex-col justify-center items-center z-10"
+			class="flex flex-col justify-center items-center z-10 max-xl:mt-20"
 		>
 			<h1 v-if="isSpectator" class="ttt-h1 pb-2">YOU ARE SPECTATING!</h1>
 			<h1 v-else class="ttt-h1 pb-2">GAME ON !</h1>
