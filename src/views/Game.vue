@@ -85,7 +85,7 @@
           <chatBox />
         </div>
       </div>
-      <div class="hidden xl:visible">
+      <div class="xl:visible hidden xl:block">
         <p
           v-if="isSpectator"
           class="ttt-subtext flex flex-row items-center ttt-turn"
