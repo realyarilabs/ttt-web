@@ -4,7 +4,7 @@
 			id="chat"
 			class="flex flex-col w-full bg-[#2d8078] rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
 		>
-			<div v-for="(message, index) in chatHistory" :key="index" class="px-2">
+			<div v-for="(message, index) in chatHistory" :key="index" class="px-2 text-white">
 				{{ message }}
 			</div>
 		</div>
