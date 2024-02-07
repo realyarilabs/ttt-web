@@ -44,7 +44,7 @@
 
 		// #1
 		//return the match channel from ticTacToeStore
-	const matchChannel = ref()
+	const matchChannel = ticTacToeStore.matchChannel!
 
 	// Tip: To access ref and computed properties tou must use var_name.value
 
