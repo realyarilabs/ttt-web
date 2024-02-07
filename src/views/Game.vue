@@ -16,25 +16,30 @@
 					<img :src="copySvg" class="ttt-icon-piece mx-2" alt="copy" />
 				</button>
 			</div>
-      <div class="grid grid-cols-3">
-			<div class="col-start-2 flex flex-col justify-center items-center pt-[3.69rem]">
-				<div v-for="(row, i) of ticTacToeStore.gameState.board" :key="i" class="flex gap-[0.94rem] pb-[0.94rem]">
-					<button
-						v-for="(value, j) of row"
-						:key="j"
-						:class="{
-							'w-20 h-20 ttt-square md:w-[8.125rem] md:h-[8.125rem] rounded-[0.625rem] flex justify-center items-center': true,
-							winner: winnerLine?.find((element) => element.x === i && element.y === j),
-						}"
-						@click="executeMove(i, j)"
-					>
-						<img v-if="value" :src="getPieceByValue(value)" class="sm:h-8 sm:w-8 md:h-28 md:w-[3.75rem]" :alt="value" />
-					</button>
+			<div class="grid grid-cols-3">
+				<div class="col-start-2 flex flex-col justify-center items-center pt-[3.69rem]">
+					<div v-for="(row, i) of ticTacToeStore.gameState.board" :key="i" class="flex gap-[0.94rem] pb-[0.94rem]">
+						<button
+							v-for="(value, j) of row"
+							:key="j"
+							:class="{
+								'w-20 h-20 ttt-square md:w-[8.125rem] md:h-[8.125rem] rounded-[0.625rem] flex justify-center items-center': true,
+								winner: winnerLine?.find((element) => element.x === i && element.y === j),
+							}"
+							@click="executeMove(i, j)"
+						>
+							<img
+								v-if="value"
+								:src="getPieceByValue(value)"
+								class="sm:h-8 sm:w-8 md:h-28 md:w-[3.75rem]"
+								:alt="value"
+							/>
+						</button>
+					</div>
 				</div>
-      </div>
-      <div class="flex pt-[3.69rem] px-14 mb-[0.94rem]">
-        <chatBox />
-      </div>
+				<div class="flex pt-[3.69rem] px-14 mb-[0.94rem]">
+					<chatBox />
+				</div>
 			</div>
 			<p v-if="isSpectator" class="ttt-subtext flex flex-row items-center ttt-turn">
 				{{ currentPlayerName }}'s Turn :
@@ -162,7 +167,12 @@
 			const routeGameID = route.params.gameID as string
 			if (!routeGameID) return
 			ticTacToeStore.gameID = routeGameID
-			ticTacToeStore.createMatchChannel()
+			const response = ticTacToeStore.createMatchChannel()
+			if (response) {
+				router.push({
+					name: "home",
+				})
+			}
 		}
 	})
 </script>
