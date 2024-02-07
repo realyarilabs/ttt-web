@@ -55,7 +55,7 @@
 		// Use the matchChannel to broadcast an event with the topic "broadcast_message" as the first parameter
 		// on the second parameter send an object containing the message received as argument to this function
 		// after pushing the event clear the currentMessage value by setting it as an empty string
-		// Tip: To access ref and computed properties tou must use var_name.value
+		// Tip: To access ref and computed properties you must use var_name.value
 	}
 
 	onMounted(() => {
