@@ -6,9 +6,9 @@
 		>
 			<div v-for="(message, index) in chatHistoryAdvanced" :key="index" class="px-2">
 				<span v-if="checkIsSpectator(message.sender_id)" class="text-black"
-					>{{ clipID(message.sender_id) }}: {{ message.message }}</span
+					>{{ clipID(message.sender_id) }} : {{ message.message }}</span
 				>
-				<span v-else class="text-white">{{ clipID(message.sender_id) }} :{{ message.message }}</span>
+				<span v-else class="text-white">{{ clipID(message.sender_id) }} : {{ message.message }}</span>
 			</div>
 		</div>
 		<div class="flex flex-col h-[25%]">
