@@ -56,6 +56,9 @@
 		// on the second parameter send an object containing the message received as argument to this function
 		// after pushing the event clear the currentMessage value by setting it as an empty string
 		// Tip: To access ref and computed properties you must use var_name.value
+    /*
+      help tip: channel.push("event_topic", { variables })
+    */
 	}
 
 	onMounted(() => {
@@ -65,6 +68,11 @@
 		// payload: { message: string; sender_id: string }
 		// the listener function will take the message from the payload and push it to the chatHistory variable
 		// optional: you can also call autoScroll function at the end to force chat window scroll to most recent message
+    /*
+      help tip: channel.on("event_topic", (payload: { variable1: string; variable2: string }) => {
+        ...do stuff
+      })
+    */
 	})
 
 	const autoScroll = () => {
