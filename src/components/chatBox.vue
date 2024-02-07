@@ -15,7 +15,7 @@
 				@keypress.enter="sendMessage(currentMessage)"
 			/>
 			<button
-				class="ttt-button btn-2 rounded-none"
+				class="ttt-button btn-3 rounded-none bg-chat-green"
 				@click="sendMessage(currentMessage)"
 			>
 				SEND
