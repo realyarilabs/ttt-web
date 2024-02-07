@@ -21,15 +21,12 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, onMounted } from "vue"
+	import { ref, onMounted, computed } from "vue"
 	import { useTicTacToeStore } from "../stores/ticTacToeStore"
-	import { useTicTacToeHelpers } from "../composables/tttHelper"
 
+	import { useTicTacToeHelpers } from "../composables/tttHelper"
 	const { checkIsSpectator } = useTicTacToeHelpers()
 	const ticTacToeStore = useTicTacToeStore()
-
-	const chatHistory = ref([""])
-	const currentMessage = ref("")
 
 	interface ChatMessage {
 		message: string
@@ -37,13 +34,21 @@
 	}
 	const chatHistoryAdvanced = ref(Array<ChatMessage>())
 
+	const chatHistory = ref([""])
+	const currentMessage = ref("")
+
+
+	const matchChannel = computed(() => {
+		return ticTacToeStore.matchChannel!
+	})
+
 	const sendMessage = (message: string) => {
-		ticTacToeStore.matchChannel?.push("broadcast_message", { message })
+		matchChannel.value.push("broadcast_message", { message })
 		currentMessage.value = ""
 	}
 
 	onMounted(() => {
-		ticTacToeStore.matchChannel?.on("game_message", (payload: { message: string; sender_id: string }) => {
+		matchChannel.value.on("game_message", (payload: { message: string; sender_id: string }) => {
 			chatHistory.value.push(payload.message)
 			chatHistoryAdvanced.value.push(payload)
 			autoScroll()
