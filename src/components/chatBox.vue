@@ -24,7 +24,7 @@
 	import { useTicTacToeStore } from "../stores/ticTacToeStore"
 
 	// Challenge SEI 3
- // Update the "game_message" listener function to save the whole payload into the chatHistoryAdvanced variable instead of chatHistory
+ // Update the "game_message" listener function to save the whole payload into the chatHistoryAdvanced variable instead of just the message to chatHistory
  // Inside the component's template :
  //     update v-for to use chatHistoryAdvanced instead of chatHistory
  //     update the message span by using v-if to check the message sender_id using the helper method checkIsSpectator
