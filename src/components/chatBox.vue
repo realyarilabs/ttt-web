@@ -4,8 +4,13 @@
 			id="chat"
 			class="flex flex-col w-full bg-chat-green rounded-t-lg h-[75%] max-h-[310px] overflow-y-auto scrollbar-thumb-rounded"
 		>
-			<div v-for="(message, index) in chatHistory" :key="index" class="px-2">
-				<span id="message" class="text-white">{{ message }}</span>
+			<div v-for="(message, index) in chatHistoryAdvanced" :key="index" class="px-2">
+				<span v-if="checkIsSpectator(message.sender_id)" id="message" class="text-black">{{ 
+					clipID(message.sender_id) + ': ' + message.message
+				}}</span>
+				<span v-else id="message" class="text-white">{{
+					clipID(message.sender_id) + ': ' + message.message
+				}}</span>
 			</div>
 		</div>
 		<div class="flex flex-col h-[25%] items-center">
@@ -37,16 +42,14 @@
 	// useful links: https://vuejs.org/guide/essentials/conditional.html#v-else
 
 	// For exercise 3 uncomment the lines below
-	/*
-import { useTicTacToeHelpers } from "../composables/tttHelper"
-const { checkIsSpectator } = useTicTacToeHelpers()
+	import { useTicTacToeHelpers } from "../composables/tttHelper"
+	const { checkIsSpectator } = useTicTacToeHelpers()
 
-interface ChatMessage {
- message: string
- sender_id: string
-}
-const chatHistoryAdvanced = ref(Array<ChatMessage>())
-*/
+	interface ChatMessage {
+		message: string
+		sender_id: string
+	}
+	const chatHistoryAdvanced = ref(Array<ChatMessage>())
 
 	const ticTacToeStore = useTicTacToeStore();
 
@@ -64,6 +67,8 @@ const chatHistoryAdvanced = ref(Array<ChatMessage>())
 		/*
     if extra help is needed check help tips below
   */
+		matchChannel.push("broadcast_message", { message: message });
+		currentMessage.value = "";
 	};
 
 	onMounted(() => {
@@ -76,6 +81,12 @@ const chatHistoryAdvanced = ref(Array<ChatMessage>())
 		/*
     if extra help is needed check help tips below
   */
+		matchChannel.on("game_message", (payload: { message: string; sender_id: string }) => {
+			chatHistory.value.push(payload.message);
+			autoScroll();
+
+			chatHistoryAdvanced.value.push(payload)
+		});
 	});
 
 	const autoScroll = () => {
